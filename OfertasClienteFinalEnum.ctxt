@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=OfertasClienteFinalEnum
+comment0.text=\r\n\ Enumerado\ \ OfertasClienteFinalEnum.\ Representa\ las\ diferentes\ ofertas\ que\ \r\n\ pueden\ ser\ realizadas\ a\ un\ pedido\ realizado\ por\ un\ cliente\ final.\r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira.\r\n\ @version\ \r\n
+comment1.params=descuento
+comment1.target=OfertasClienteFinalEnum(float)
+comment2.params=
+comment2.target=float\ getDescuento()
+numComments=3
