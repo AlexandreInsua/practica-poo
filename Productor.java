@@ -1,23 +1,20 @@
+import java.util.List;
+
 /**
- * Abstract class Productor - write a description of the class here
+ * Clase abstracta Productor - Representa un Productor genérico no instanciable.
+ * Implementa un identificador único para cada producto, el nombre y los productos
+ * que proporciona a la cooperativa.
  * 
- * @author: 
- * Date: 
+ * @author: Alexandre Insua Moreira.
+ * @version: 
  */
 public abstract class Productor
 {
-    // instance variables - replace the example below with your own
-    int x;
+    private long id;
+    private String nombre;
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y    a sample parameter for a method
-     * @return        the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    Productor(String n){
+        nombre = n;
     }
+
 }

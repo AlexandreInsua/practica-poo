@@ -5,20 +5,17 @@
  * @author Alexandre Insua Moreira
  * @version 
  */
-public class Distribuidor extends Cliente
+public class PequenaLogistica extends Logistica 
 {
     // instance variables - replace the example below with your own
     
-
     /**
-     * Constructor for objects of class Distribuidor
+     * Constructor for objects of class PequenaLogistica
      */
-    public Distribuidor()
+    public PequenaLogistica()
     {
-        super();
         // initialise instance variables
     
     }
 
-    
 }

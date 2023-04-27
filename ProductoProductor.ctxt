@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=ProductoProductor
+comment0.text=\r\n\ Clase\ ProductoProductor.\ Representa\ un\ producto\ producido\ por\ un\ productor\ dado.\r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\ \r\n
+comment1.params=p\ e
+comment1.target=ProductoProductor(Producto,\ int)
+comment1.text=\r\n\ Constructor\ para\ objetos\ de\ la\ clase\ ProductoProductor\r\n
+numComments=2

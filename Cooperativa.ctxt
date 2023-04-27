@@ -1,3 +1,9 @@
 #BlueJ class context
 comment0.target=Cooperativa
-numComments=1
+comment0.text=\r\n\ \r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\ \r\n
+comment1.params=
+comment1.target=Cooperativa()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Cooperativa\r\n
+comment2.params=
+comment2.target=void\ run()
+numComments=3

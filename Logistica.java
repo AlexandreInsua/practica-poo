@@ -5,14 +5,18 @@
  * @author Alexandre Insua Moreira
  * @version 
  */
-public class Pedido
+public class Logistica
 {
-        /**
-     * Constructor for objects of class Pedigo
+    
+
+    /**
+     * Constructor for objects of class Logística
      */
-    public Pedido()
+    public Logistica()
     {
         // initialise instance variables
     
     }
+
+    
 }
