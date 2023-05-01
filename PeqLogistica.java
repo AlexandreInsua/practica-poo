@@ -5,14 +5,14 @@
  * @author Alexandre Insua Moreira
  * @version 
  */
-public class PequenaLogistica extends Logistica 
+public class PeqLogistica extends Logistica 
 {
     // instance variables - replace the example below with your own
     
     /**
-     * Constructor for objects of class PequenaLogistica
+     * Constructor para objetos de la clase PeqLogistica
      */
-    public PequenaLogistica()
+    public PeqLogistica()
     {
         // initialise instance variables
     

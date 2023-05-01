@@ -1,6 +1,23 @@
 #BlueJ class context
 comment0.target=Producto
-comment0.text=\r\n\ Clase\ Producto.\r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira.\r\n\ @version\ \r\n
-comment1.params=
-comment1.target=Producto()
-numComments=2
+comment0.text=\r\n\ Clase\ abtracta\ Producto.\ Representa\ gen\u00E9rica\ de\ un\ producto\ disponible\r\n\ en\ la\ cooperativa.\r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira.\r\n\ @version\ \r\n
+comment1.params=n\ r\ p
+comment1.target=Producto(java.lang.String,\ float,\ float)
+comment1.text=\r\n\ Constructor\ de\ objectos\ de\ la\ clase\ Productor.\r\n\ @param\ nombre\ nombre\ del\ producto.\r\n\ @param\ rendimiento\ rendimiento\ (en\ tm.)\ del\ produto\ por\ hect\u00E1reas.\r\n\ @param\ precio\ precio\ (en\ Euros)\ de\ referencia\ del\ producto.\r\n
+comment2.params=
+comment2.target=java.lang.String\ getNombre()
+comment3.params=r
+comment3.target=void\ setRendimiento(float)
+comment4.params=
+comment4.target=float\ getRendimiento()
+comment5.params=p
+comment5.target=void\ setPrecio(float)
+comment6.params=
+comment6.target=float\ getPrecio()
+comment7.params=p
+comment7.target=void\ addProductor(Productor)
+comment8.params=
+comment8.target=float\ getProduccion()
+comment9.params=
+comment9.target=float\ disponible()
+numComments=10

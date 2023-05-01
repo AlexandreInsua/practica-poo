@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Perecedero
+comment0.text=\r\n\ Clase\ Perecedero.\ Representa\ un\ producto\ perecedero.\r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira.\r\n\ @version\ \r\n
+comment1.params=nombre\ rendimiento\ precio
+comment1.target=Perecedero(java.lang.String,\ float,\ float)
+comment1.text=\r\n\ Constructor\ para\ objetos\ de\ la\ clase\ Perecedero\r\n\ @param\ nombre\ nombre\ del\ producto.\r\n\ @param\ rendimiento\ rendimiento\ (en\ tm.)\ del\ produto\ por\ hect\u00E1reas.\r\n\ @param\ precio\ precio\ (en\ Euros)\ de\ referencia\ del\ producto.\r\n
+comment2.params=
+comment2.target=java.lang.String\ toString()
+numComments=3

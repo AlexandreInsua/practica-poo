@@ -1,11 +1,11 @@
 
 /**
- * Clase Grande que representa un gran productor.
+ * Clase GranProductor que representa un gran productor.
  * 
  * @author Alexandre Insua Moreira
  * @version 
  */
-public class Grande extends Productor
+public class GranProductor extends Productor
 {
     // instance variables - replace the example below with your own
     
@@ -13,7 +13,7 @@ public class Grande extends Productor
     /**
      * Constructor for objects of class Grande
      */
-    public Grande(String nombre)
+    public GranProductor(String nombre)
     {
         super(nombre);
         // initialise instance variables

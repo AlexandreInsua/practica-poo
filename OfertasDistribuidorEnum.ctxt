@@ -1,8 +1,0 @@
-#BlueJ class context
-comment0.target=OfertasDistribuidorEnum
-comment0.text=\r\n\ Enumerado\ OfertasDistribuidorEnum.\ Representa\ las\ diferentes\ ofertas\ que\ \r\n\ pueden\ ser\ realizadas\ a\ un\ pedido\ realizado\ por\ un\ distribuidor.\r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\ \r\n
-comment1.params=descuento
-comment1.target=OfertasDistribuidorEnum(float)
-comment2.params=
-comment2.target=float\ getDescuento()
-numComments=3

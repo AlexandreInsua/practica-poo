@@ -1,10 +1,10 @@
 
 /**
- * Clase Pequeno que representa un productor pequeño.
+ * Clase PeqProductor que representa un productor pequeño.
  *  @author Alexandre Insua Moreira
  * @version 
  */
-public class Pequeno extends Productor
+public class PeqProductor extends Productor
 {
     
      private ProductoProductor[] productos;
@@ -12,7 +12,7 @@ public class Pequeno extends Productor
     /**
      * Constructor for objects of class Pequeno
      */
-    public Pequeno(String nombre)
+    public PeqProductor(String nombre)
     {
         super(nombre);
         // initialise instance variables
