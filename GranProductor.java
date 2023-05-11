@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * Clase GranProductor que representa un gran productor.
@@ -8,7 +9,7 @@
 public class GranProductor extends Productor
 {
     // instance variables - replace the example below with your own
-    
+    ArrayList<ProductoProductor> productos;
 
     /**
      * Constructor for objects of class Grande
@@ -16,7 +17,7 @@ public class GranProductor extends Productor
     public GranProductor(String nombre)
     {
         super(nombre);
-        // initialise instance variables
+        productos = new ArrayList<ProductoProductor>();
     
     }
 

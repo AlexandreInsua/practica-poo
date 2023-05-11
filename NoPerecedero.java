@@ -3,7 +3,7 @@
  * Clase NoPerecedero. Representa un producto no perecedero.
  * 
  * @author Alexandre Insua Moreira.
- * @version (a version number or a date)
+ * @version
  */
 public class NoPerecedero extends Producto
 {

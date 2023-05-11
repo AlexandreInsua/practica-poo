@@ -1,6 +1,7 @@
 
 /**
- * Clase ProductoProductor. Representa un producto producido por un productor dado.
+ * Clase ProductoProductor. Representa un producto y su extensión del cultivo
+ * a cargo de un producto.
  * 
  * @author Alexandre Insua Moreira
  * @version 

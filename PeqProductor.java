@@ -15,7 +15,7 @@ public class PeqProductor extends Productor
     public PeqProductor(String nombre)
     {
         super(nombre);
-        // initialise instance variables
+        productos = new ProductoProductor[5];
     
     }
 
