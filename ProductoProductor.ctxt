@@ -1,7 +1,20 @@
 #BlueJ class context
 comment0.target=ProductoProductor
-comment0.text=\r\n\ Clase\ ProductoProductor.\ Representa\ un\ producto\ y\ su\ extensi\u00F3n\ del\ cultivo\r\n\ a\ cargo\ de\ un\ producto.\r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\ \r\n
-comment1.params=p\ e
-comment1.target=ProductoProductor(Producto,\ int)
-comment1.text=\r\n\ Constructor\ para\ objetos\ de\ la\ clase\ ProductoProductor\r\n
-numComments=2
+comment0.text=\r\n\ Clase\ ProductoProductor.\ Esta\ clase\ permite\ gestionar\ la\ informaci\u00F3n\ relacionada\ con\ un\ producto,\ su\r\n\ extensi\u00F3n\ de\ cultivo\ asignada\ a\ un\ productor\ espec\u00EDfico\ y\ su\ cantidad\ disponible.\r\n\ \r\n\ Autor\:\ Alexandre\ Insua\ Moreira\r\n\ Versi\u00F3n\:\ 1.0\r\n
+comment1.params=producto\ extension
+comment1.target=ProductoProductor(Producto,\ float)
+comment1.text=\r\n\ Constructor\ para\ objetos\ de\ la\ clase\ ProductoProductor.\r\n\ \r\n\ @param\ produto\ El\ producto\ a\ asignar\ al\ productor.\r\n\ @param\ extension\ La\ extensi\u00F3n\ del\ cultivo\ a\ asignar\ al\ productor.\r\n
+comment2.params=federado
+comment2.target=void\ setFederado(boolean)
+comment3.params=
+comment3.target=Producto\ getProducto()
+comment3.text=\r\n\ Obtiene\ el\ producto\ asignado\ al\ productor.\r\n\ \r\n\ @return\ El\ producto\ asignado\ al\ productor.\r\n
+comment4.params=
+comment4.target=float\ getExtension()
+comment4.text=\r\n\ Obtiene\ la\ extensi\u00F3n\ del\ cultivo\ asignada\ al\ productor.\r\n\ \r\n\ @return\ La\ extensi\u00F3n\ del\ cultivo\ asignada\ al\ productor.\r\n
+comment5.params=
+comment5.target=boolean\ getFedederado()
+comment6.params=
+comment6.target=java.lang.String\ toString()
+comment6.text=\r\n\ Devuelve\ una\ representaci\u00F3n\ en\ forma\ de\ cadena\ de\ caracteres\ del\ objeto\ ProductoProductor.\r\n\ \r\n\ @return\ Una\ representaci\u00F3n\ en\ forma\ de\ cadena\ de\ caracteres\ del\ objeto\ ProductoProductor.\r\n
+numComments=7

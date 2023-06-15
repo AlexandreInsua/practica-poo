@@ -13,8 +13,11 @@ public abstract class Productor
     private long id;
     private String nombre;
 
-    Productor(String n){
-        nombre = n;
+    Productor(String nombre){
+        this.nombre = nombre;
     }
 
+    public String getNombre(){
+        return nombre;
+    }
 }

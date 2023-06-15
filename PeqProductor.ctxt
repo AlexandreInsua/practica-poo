@@ -1,7 +1,22 @@
 #BlueJ class context
 comment0.target=PeqProductor
-comment0.text=\r\n\ Clase\ PeqProductor\ que\ representa\ un\ productor\ peque\u00F1o.\r\n\ \ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\ \r\n
+comment0.text=\r\n\ Clase\ PeqProductor\ que\ representa\ un\ productor\ peque\u00F1o.\r\n\ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\ \r\n
 comment1.params=nombre
 comment1.target=PeqProductor(java.lang.String)
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Pequeno\r\n
-numComments=2
+comment2.params=
+comment2.target=java.lang.String\ toString()
+comment3.params=p
+comment3.target=boolean\ asignarProducto(ProductoProductor)
+comment4.params=
+comment4.target=void\ checkProductNumber()
+comment5.params=p
+comment5.target=void\ checkIsProduct(ProductoProductor)
+comment6.params=p
+comment6.target=void\ checkTotalCropArea(ProductoProductor)
+comment7.params=cropArea
+comment7.target=void\ updateTotalCropArea(float)
+comment8.params=
+comment8.target=java.lang.String\ listProducts()
+comment9.params=
+comment9.target=void\ verInfo()
+numComments=10

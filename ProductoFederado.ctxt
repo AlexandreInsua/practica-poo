@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=ProductoFederado
+comment0.text=\r\n\ ProductoFederado\ .\r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira.\ \r\n\ @version\ \r\n
+comment1.params=pro\ p
+comment1.target=ProductoFederado(Productor,\ ProductoProductor)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ ProductoFederado\r\n
+comment2.params=
+comment2.target=Productor\ getProdutor()
+comment3.params=
+comment3.target=ProductoProductor\ getProductoProductor()
+numComments=4

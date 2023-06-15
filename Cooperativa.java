@@ -8,8 +8,11 @@ import java.util.ArrayList;
  */
 public class Cooperativa
 {
+    private final int PRODUCCION_LIMITE = 5;
+
     ArrayList<Producto> productos;
-    ArrayList<Productor> productores;
+    ArrayList<NoFederado> productores;
+    ArrayList<Federado> federados;
     ArrayList<Logistica> logisticas;
     ArrayList<Cliente> clientes;
     ArrayList<Pedido> pedidos;
@@ -20,7 +23,8 @@ public class Cooperativa
     public Cooperativa()
     {
         productos = new ArrayList<Producto>();
-        productores = new ArrayList<Productor>();
+        productores = new ArrayList<NoFederado>();
+        federados = new ArrayList<Federado>();
         logisticas = new ArrayList<Logistica>();
         clientes = new ArrayList<Cliente>();
         pedidos = new ArrayList<Pedido>();
@@ -42,13 +46,39 @@ public class Cooperativa
         Producto p3 = new Perecedero("Naranjas", 2.3f, 0.55f);
         Producto p4 = new Perecedero("Tomates", 6.0f, 0.95f);
         Producto p5 = new Perecedero("Melocotones", 2.4f, 0.47f);
+        Producto p6 = new Perecedero("Ciruelas", 2.5f, 0.67f);
+        Producto p7 = new NoPerecedero("Trigo", 2.4f, 0.47f);
 
-        productos.add(p1);
-        productos.add(p2);
-        productos.add(p3);
-        productos.add(p4);
-        productos.add(p5);
+        agregarProducto(p1);
+        agregarProducto(p2);
+        agregarProducto(p3);
+        agregarProducto(p4);
+        agregarProducto(p5);  
+        agregarProducto(p6);
+        agregarProducto(p7);
+
         listarProductos();
+
+        ProductoProductor pp1 = new ProductoProductor(p3,1.5f);
+        ProductoProductor pp2 = new ProductoProductor(p2,0.5f);
+        ProductoProductor pp3 = new ProductoProductor(p5,1.5f);
+        ProductoProductor pp4 = new ProductoProductor(p6,2.6f);
+        ProductoProductor pp5 = new ProductoProductor(p7,1.3f);
+        ProductoProductor pp6 = new ProductoProductor(p2,0.2f);
+
+        NoFederado pr1 = new PeqProductor("Juan P.");
+
+        pr1.asignarProducto(pp1);
+        pr1.asignarProducto(pp2);
+        pr1.asignarProducto(pp3);
+
+        NoFederado pr2 = new PeqProductor("Sonia R.");
+        pr2.asignarProducto(pp5);
+        pr2.asignarProducto(pp6);
+
+        agregarProductor(pr1);
+        agregarProductor(pr2);
+        listarProductores();
 
     }
 
@@ -64,7 +94,7 @@ public class Cooperativa
 
         for (Producto p: productos){
             if (pro.getNombre().equals(p.getNombre())){
-                throw new Exception("El producto ya está incluido. No se puede agregar el mismo producto de nuevo");
+                throw new IllegalArgumentException("El producto ya está incluido. No se puede agregar el mismo producto de nuevo");
             }
         }
 
@@ -98,13 +128,60 @@ public class Cooperativa
         }
     }
 
-    // PRODUCTORES
-    private boolean addProductor(Productor p) {
+    // PRODUCTORES NO FEDERADOS
+    private boolean addProductor(NoFederado p) {
 
-        return true; 
-    }
+        for (NoFederado pro: productores){
 
-    public void agregarProductor(Productor p){
+            if(pro.getNombre().equals(p.getNombre())){
+                throw new IllegalArgumentException("No se puede agregar el productor porque el nombre ya existe");    
+            }
+        }
+
         productores.add(p);
+        return true;
+
     }
+
+    public void agregarProductor(NoFederado p){
+
+        try {
+            if (productores.add(p)) {
+                System.out.println("Productor agregado");
+            } 
+        } catch (Exception e){
+            System.err.println(e);
+        }
+    }
+
+    public void listarProductores(){
+        System.out.println("PRODUCTORES ACTIVOS EN LA COOPERATIVA");
+        for (NoFederado productor: productores){
+            System.out.println(productor.toString());
+        }
+    }
+
+    // PRODUCTOS FEDERADOS
+    public void federarProducto(Productor productor, ProductoProductor producto){
+        try {
+            isFederate(producto);
+
+            // si, comprobar límite
+        }
+        catch (Exception e) {
+            System.err.println(e);
+        }
+        // non crear produto federado
+    }
+
+
+
+    private boolean isFederate(ProductoProductor producto){
+        if(producto.getFedederado()){
+            throw new IllegalArgumentException("No se puede superar un producto ya federado.");    
+        }
+        return true;
+    }
+
 }
+
