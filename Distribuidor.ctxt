@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=Distribuidor
-comment0.text=\r\n\ \r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\ \r\n
-comment1.params=
-comment1.target=Distribuidor()
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Distribuidor\r\n
+comment0.text=\r\n\ Esta\ clase\ representa\ un\ distribuidor,\ que\ es\ un\ tipo\ de\ cliente\ de\ una\ cooperativa.\r\n\ Hereda\ de\ la\ clase\ Cliente\ y\ proporciona\ una\ implementaci\u00F3n\ concreta\ de\ sus\ m\u00E9todos.\r\n\ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\ 1.0\r\n
+comment1.params=nombre\ distancia
+comment1.target=Distribuidor(java.lang.String,\ int)
+comment1.text=\r\n\ Constructor\ de\ la\ clase\ Distribuidor.\r\n\ @param\ nombre\ El\ nombre\ del\ distribuidor.\r\n\ @param\ distancia\ La\ distancia\ del\ distribuidor\ hasta\ la\ cooperativa.\r\n
 numComments=2

@@ -1,4 +1,13 @@
 #BlueJ class context
 comment0.target=Cliente
-comment0.text=\r\n\ \r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\r\n
-numComments=1
+comment0.text=\r\n\ Esta\ clase\ abstracta\ representa\ a\ un\ cliente\ de\ una\ cooperativa.\r\n\ Contiene\ informaci\u00F3n\ b\u00E1sica\ como\ el\ nombre\ del\ cliente\ y\ la\ distancia\r\n\ del\ cliente\ hasta\ la\ cooperativa.\r\n\ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\ 1.0\r\n
+comment1.params=nombre\ distancia
+comment1.target=Cliente(java.lang.String,\ int)
+comment1.text=\r\n\r\n\ \ \ \ Constructor\ de\ la\ clase\ Cliente.\r\n\ \ \ \ @param\ nombre\ El\ nombre\ del\ cliente.\r\n\ \ \ \ @param\ distancia\ La\ distancia\ del\ cliente\ hasta\ la\ cooperativa.\r\n
+comment2.params=
+comment2.target=java.lang.String\ getNombre()
+comment2.text=\r\n\r\n\ \ \ \ Obtiene\ el\ nombre\ del\ cliente.\r\n\ \ \ \ @return\ El\ nombre\ del\ cliente.\r\n
+comment3.params=
+comment3.target=int\ getDistancia()
+comment3.text=\r\n\r\n\ \ \ \ Obtiene\ la\ distancia\ del\ cliente\ hasta\ la\ cooperativa.\r\n\ \ \ \ @return\ La\ distancia\ del\ cliente.\r\n
+numComments=4

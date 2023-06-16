@@ -1,24 +1,17 @@
-
 /**
- * 
- * 
+ * Esta clase representa un distribuidor, que es un tipo de cliente de una cooperativa.
+ * Hereda de la clase Cliente y proporciona una implementación concreta de sus métodos.
  * @author Alexandre Insua Moreira
- * @version 
+ * @version 1.0
  */
-public class Distribuidor extends Cliente
-{
-    // instance variables - replace the example below with your own
-    
+public class Distribuidor extends Cliente {
 
     /**
-     * Constructor for objects of class Distribuidor
+     * Constructor de la clase Distribuidor.
+     * @param nombre El nombre del distribuidor.
+     * @param distancia La distancia del distribuidor hasta la cooperativa.
      */
-    public Distribuidor()
-    {
-        super();
-        // initialise instance variables
-    
+    public Distribuidor(String nombre, int distancia) {
+        super(nombre, distancia);
     }
-
-    
 }
