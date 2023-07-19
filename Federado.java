@@ -14,7 +14,7 @@ public class Federado extends Productor
 
     // relación de productos federados
     private ArrayList<ProductoFederado> productosFederados;
-    
+
     /**
      * Constructor de la clase Federado que recibe el nombre del producto como parámetro.
      * @param nombreProducto El nombre del producto.
@@ -111,8 +111,9 @@ public class Federado extends Productor
         return true;
     }
 
-    public String toString(){
-        String info = "Productor federado: " + getNombre();   
-        return info;
+    public String toString(){ 
+        return  getNombre() + productosFederados.stream()
+        .map( producto -> producto.toString())
+        .reduce( "", (acc, str)-> acc + "\n\t" + str );
     }
 }

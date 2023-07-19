@@ -72,8 +72,9 @@ public class PeqProductor extends NoFederado
 
     private String listProducts(){
         String productList = ""; 
+
         for(ProductoProductor p: productos){
-            if (p != null) {
+            if (p != null && p.getFedederado() != true) {
                 productList += "\n\t" + p.toString();
             }
         }

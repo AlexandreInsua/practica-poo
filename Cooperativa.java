@@ -40,6 +40,7 @@ public class Cooperativa
         // System.exit(0);
     }
 
+    // TEST
     private void test(){
         Producto p1 = new NoPerecedero("Aceite", 3.5f, 0.8f);
         Producto p2 = new NoPerecedero("Algodón", 1.5f, 0.23f);
@@ -68,6 +69,7 @@ public class Cooperativa
 
         NoFederado pr1 = new PeqProductor("Juan P.");
 
+        // TODO se asignar producto - 
         pr1.asignarProducto(pp1);
         pr1.asignarProducto(pp2);
         pr1.asignarProducto(pp3);
@@ -80,12 +82,19 @@ public class Cooperativa
         agregarProductor(pr2);
         listarProductores();
 
+        // federa productos algodón 
+        Federado algodon = new Federado("Algodón");
+        federados.add(algodon);
+        algodon.federarProducto(pr1, pp2);
+        algodon.federarProducto(pr2, pp6);
+
+        listarProductores();
+        listarFederados();
     }
 
     // PRODUCTOS
     /**
      * Agrega un nuevo producto a la lista de productos. Si el producto ya está en la lista, se lanza una excepción.
-     *
      * @param pro el producto que se va a agregar a la lista
      * @return true si el producto se agregó correctamente a la lista
      * @throws Exception si el producto ya está en la lista
@@ -104,25 +113,31 @@ public class Cooperativa
 
     /**
      * Agrega un producto a la lista de productos y muestra un mensaje en la consola indicando si se agregó correctamente o no.
-     *
      * @param producto el producto que se va a agregar a la lista
      */
     public void agregarProducto(Producto producto) {
         try {
-            if (addProduct(producto)) {
-                System.out.println("Producto agregado");
-            }
+            if (addProduct(producto)) {            }
         } catch (Exception e) {
             System.err.println(e);
         }
 
     }
 
+    public void updateAvailableProduct(Productor productor){
+        // para cada producto do productor
+        // localizar cada producto na lista de produtos
+        //      para cada producto
+        //          agregar o produtor á súa lista de produtores
+        //          actualizar a producción anual
+        //          actualizar
+    }
+
     /**
      * Muestra en la consola la lista de productos activos en la cooperativa.
      */
     public void listarProductos(){
-        System.out.println("PRODUCTOS ACTIVOS EN LA COOPERATIVA");
+        System.out.println("\nPRODUCTOS ACTIVOS EN LA COOPERATIVA");
         for (Producto producto: productos){
             System.out.println(producto.toString());
         }
@@ -146,8 +161,8 @@ public class Cooperativa
     public void agregarProductor(NoFederado p){
 
         try {
-            if (productores.add(p)) {
-                System.out.println("Productor agregado");
+            if (productores.add(p)) { 
+                updateAvailableProduct(p);
             } 
         } catch (Exception e){
             System.err.println(e);
@@ -155,7 +170,7 @@ public class Cooperativa
     }
 
     public void listarProductores(){
-        System.out.println("PRODUCTORES ACTIVOS EN LA COOPERATIVA");
+        System.out.println("\nPRODUCTORES ACTIVOS EN LA COOPERATIVA");
         for (NoFederado productor: productores){
             System.out.println(productor.toString());
         }
@@ -165,7 +180,6 @@ public class Cooperativa
     public void federarProducto(Productor productor, ProductoProductor producto){
         try {
             isFederate(producto);
-
             // si, comprobar límite
         }
         catch (Exception e) {
@@ -174,8 +188,6 @@ public class Cooperativa
         // non crear produto federado
     }
 
-
-
     private boolean isFederate(ProductoProductor producto){
         if(producto.getFedederado()){
             throw new IllegalArgumentException("No se puede superar un producto ya federado.");    
@@ -183,5 +195,11 @@ public class Cooperativa
         return true;
     }
 
+    public void listarFederados(){
+        System.out.println("\nPRODUCTOS FEDERADOS");
+        for(Federado federado: federados){
+            System.out.println(federado.toString());
+        }
+    }
 }
 

@@ -1,5 +1,7 @@
+en pegProductor -> filtrar os produtos non federados
+                -> refactorizar a presentación da información
+no método test federar productos 
 implementar a federación do productos, -> mostrar produtos federados.
-
 
 ler de novo o enunciado para comprobar onde se necesita a información de produtor federado.
 ver seguintes pasos

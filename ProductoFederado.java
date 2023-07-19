@@ -28,4 +28,8 @@ public class ProductoFederado
     public ProductoProductor getProductoProductor(){
         return producto;
     }
+
+    public String toString(){
+        return producto.getExtension() +  " Ha. Productor: " + productor.getNombre(); 
+    }
 }
