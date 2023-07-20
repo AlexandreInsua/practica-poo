@@ -1,8 +1,13 @@
 #BlueJ class context
 comment0.target=NoFederado
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ NoFederado\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Clase\ abstracta\ NoFederado\ representa\ una\ abstracci\u00F3n\ que\ modela\ \r\n\ el\ comportamiento\ com\u00FAn\ a\ las\ clases\ GranProductor\ y\ PeqProductor.\r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\ \r\n
 comment1.params=nombre
 comment1.target=NoFederado(java.lang.String)
+comment1.text=\r\n\ Constructor\ de\ la\ clase\ NoFederado.\r\n\ @param\ nombre\ El\ nombre\ del\ productor\ no\ federado.\r\n
 comment2.params=producto
 comment2.target=boolean\ asignarProducto(ProductoProductor)
-numComments=3
+comment2.text=\r\n\ M\u00E9todo\ abstracto\ para\ asignar\ un\ producto\ al\ productor\ no\ federado.\r\n\ @param\ producto\ El\ producto\ a\ ser\ asignado\ al\ productor\ no\ federado.\r\n\ @return\ true\ si\ el\ producto\ se\ asign\u00F3\ correctamente,\ false\ en\ caso\ contrario.\r\n
+comment3.params=
+comment3.target=java.util.List\ getProductos()
+comment3.text=\r\n\ M\u00E9todo\ abstracto\ para\ obtener\ la\ lista\ de\ productos\ del\ productor\ no\ federado.\r\n\r\n\ @return\ Una\ lista\ de\ objetos\ ProductoProductor\ que\ representa\ los\ productos\ asignados\ al\ productor\ no\ federado.\r\n
+numComments=4
