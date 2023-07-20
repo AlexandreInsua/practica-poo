@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Clase Cooperativa. Representa la cooperativa empresarial.
@@ -58,8 +59,6 @@ public class Cooperativa
         agregarProducto(p6);
         agregarProducto(p7);
 
-        listarProductos();
-
         ProductoProductor pp1 = new ProductoProductor(p3,1.5f);
         ProductoProductor pp2 = new ProductoProductor(p2,0.5f);
         ProductoProductor pp3 = new ProductoProductor(p5,1.5f);
@@ -67,9 +66,7 @@ public class Cooperativa
         ProductoProductor pp5 = new ProductoProductor(p7,1.3f);
         ProductoProductor pp6 = new ProductoProductor(p2,0.2f);
 
-        NoFederado pr1 = new PeqProductor("Juan P.");
-
-        // TODO se asignar producto - 
+        NoFederado pr1 = new PeqProductor("Juan P.");     
         pr1.asignarProducto(pp1);
         pr1.asignarProducto(pp2);
         pr1.asignarProducto(pp3);
@@ -80,14 +77,14 @@ public class Cooperativa
 
         agregarProductor(pr1);
         agregarProductor(pr2);
-        listarProductores();
 
-        // federa productos algodón 
         Federado algodon = new Federado("Algodón");
         federados.add(algodon);
         algodon.federarProducto(pr1, pp2);
         algodon.federarProducto(pr2, pp6);
-
+        
+        listarProductos();
+        
         listarProductores();
         listarFederados();
     }
@@ -124,13 +121,24 @@ public class Cooperativa
 
     }
 
-    public void updateAvailableProduct(Productor productor){
-        // para cada producto do productor
-        // localizar cada producto na lista de produtos
-        //      para cada producto
-        //          agregar o produtor á súa lista de produtores
-        //          actualizar a producción anual
-        //          actualizar
+    private void updateAvailableProduct(NoFederado productor){
+        List<ProductoProductor> productos = productor.getProductos();
+        for (ProductoProductor producto: productos){
+            Producto p = searchProduct(producto.getProducto().getNombre());
+            p.addProductor(productor);
+            p.setProduccion(p.getProduccion()+ producto.getExtension());
+            p.setDisponible(p.getDisponible() + producto.getDisponible());
+        }
+
+    }
+
+    private Producto searchProduct(String productName){
+        for (Producto producto : productos) {
+            if (producto.getNombre().equals(productName)) {
+                return producto;
+            }
+        }
+        return null;
     }
 
     /**

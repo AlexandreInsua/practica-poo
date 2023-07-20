@@ -19,7 +19,11 @@ public class Perecedero extends Producto
         super(nombre, rendimiento, precio);
     }
 
+    /**
+     * Devuelve una representación en forma de cadena (String) de la información relevante del producto.
+     * @return Una cadena que representa la información del producto
+     */
     public String toString(){
-        return getNombre() + ". Perecedero. Precio de ref.: " + getPrecio() + "€";
+        return getNombre() + ". Perecedero. Precio de ref.: " + getPrecio() + "€. Producción anual: " + getProduccion()+ "Tm. Disponible: " + getDisponible() + "Tm";
     }
 }

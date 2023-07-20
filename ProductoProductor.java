@@ -51,6 +51,14 @@ public class ProductoProductor {
         return extension;
     }
 
+    public void setDisponible(float d) {
+        disponible = d;
+    }
+
+    public float getDisponible() {
+        return disponible;
+    }
+
     public boolean getFedederado(){
         return federado;
     }

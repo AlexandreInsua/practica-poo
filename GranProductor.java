@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Clase GranProductor que representa un gran productor. Esta clase extiende la clase Productor
@@ -10,7 +11,8 @@ import java.util.ArrayList;
  */
 public class GranProductor extends NoFederado {
 
-    ArrayList<ProductoProductor> productos; // Lista de productos asignados al gran productor
+    // Lista de productos asignados al gran productor
+    ArrayList<ProductoProductor> productos;
 
     /**
      * Constructor para objetos de la clase GranProductor.
@@ -48,6 +50,15 @@ public class GranProductor extends NoFederado {
             System.err.println(e);
         }
         return result;
+    }
+
+    /**
+     * Devuelve la lista de productos asignados al productor.
+     * @return Una lista de objetos ProductoProductor que representa los productos asignados
+     *         al productor.
+     */
+    public List<ProductoProductor> getProductos(){
+        return productos;
     }
 
     /**
