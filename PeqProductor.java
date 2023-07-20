@@ -1,17 +1,30 @@
+import java.util.Arrays;
+import java.util.List;
 
 /**
- * Clase PeqProductor que representa un productor pequeño.
+ * Clase PeqProductor que representa a un pequeño productor no federado.
+ * Extiende de la clase abstracta NoFederado y proporciona una implementación específica
+ * para las operaciones relacionadas con los productos asignados al productor.
  * @author Alexandre Insua Moreira
  * @version 
  */
 public class PeqProductor extends NoFederado
 {
 
+    // Lista de productos asignados al gran productor
     private ProductoProductor[] productos;
+    // Campo auxiliar para controlar el número de productos durante su asignación
     private int contador;
+    // Campo auxiliar para controlar la extensión total de producción
     private float extensionTotal;
+    // Límite de extensión total máxima para los pequeños produtores
     private final int EXTENSION_LIMITE = 5;
 
+    /**
+     * Constructor de la clase PeqProductor.
+     *
+     * @param nombre El nombre del pequeño productor.
+     */
     public PeqProductor(String nombre)
     {
         super(nombre);
@@ -20,10 +33,13 @@ public class PeqProductor extends NoFederado
 
     }
 
-    public String toString(){
-        return getNombre() + " Pequeño productor" + listProducts();
-    }
-
+    /**
+     * Asigna un producto al pequeño productor.
+     *
+     * @param p El producto a ser asignado al pequeño productor.
+     * @return true si el producto se asignó correctamente, false en caso contrario.
+     * @throws Exception si no se puede agregar el producto debido a restricciones del productor.
+     */
     public boolean asignarProducto(ProductoProductor p){
         boolean result = false;
 
@@ -42,6 +58,34 @@ public class PeqProductor extends NoFederado
             System.err.println(e);
         }
         return result; 
+    }
+
+    /**
+     * Devuelve la lista de productos asignados al productor.
+     * @return Una lista de objetos ProductoProductor que representa los productos asignados
+     *         al productor.
+     */
+    public List<ProductoProductor> getProductos(){
+        return Arrays.asList(productos);
+    }
+
+    /**
+     * Imprime la lista de productos asignados al pequeño productor.
+     *
+     * @return Una lista de objetos ProductoProductor que representa los productos asignados
+     *         al pequeño productor.
+     */
+    public void verInfo(){
+        System.out.println(toString());
+    }
+
+    /**
+     * Devuelve una representación en cadena del pequeño productor y su lista de productos.
+     *
+     * @return Una cadena que representa al pequeño productor y su lista de productos asignados.
+     */
+    public String toString(){
+        return getNombre() + " Pequeño productor" + listProducts();
     }
 
     private void checkProductNumber() throws Exception {
@@ -79,10 +123,6 @@ public class PeqProductor extends NoFederado
             }
         }
         return productList; 
-    }
-
-    public void verInfo(){
-        System.out.println(toString());
     }
 }
 
