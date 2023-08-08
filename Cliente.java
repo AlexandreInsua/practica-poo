@@ -19,6 +19,8 @@ public abstract class Cliente {
     @param distancia La distancia del cliente hasta la cooperativa.
      */
     public Cliente(String nombre, int distancia) {
+        // validar a distancia
+        
         this.nombre = nombre;
         this.distancia = distancia;
     }
@@ -32,7 +34,7 @@ public abstract class Cliente {
         return nombre;
     }
 
-    /**
+    /**                                                                      
 
     Obtiene la distancia del cliente hasta la cooperativa.
     @return La distancia del cliente.

@@ -9,5 +9,5 @@ comment2.target=java.lang.String\ getNombre()
 comment2.text=\r\n\r\n\ \ \ \ Obtiene\ el\ nombre\ del\ cliente.\r\n\ \ \ \ @return\ El\ nombre\ del\ cliente.\r\n
 comment3.params=
 comment3.target=int\ getDistancia()
-comment3.text=\r\n\r\n\ \ \ \ Obtiene\ la\ distancia\ del\ cliente\ hasta\ la\ cooperativa.\r\n\ \ \ \ @return\ La\ distancia\ del\ cliente.\r\n
+comment3.text=\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \r\n\r\n\ \ \ \ Obtiene\ la\ distancia\ del\ cliente\ hasta\ la\ cooperativa.\r\n\ \ \ \ @return\ La\ distancia\ del\ cliente.\r\n
 numComments=4

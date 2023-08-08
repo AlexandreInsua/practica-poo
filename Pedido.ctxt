@@ -1,7 +1,16 @@
 #BlueJ class context
 comment0.target=Pedido
-comment0.text=\r\n\ \r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\ \r\n
-comment1.params=
-comment1.target=Pedido()
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Pedigo\r\n
-numComments=2
+comment0.text=\r\n\ La\ clase\ Pedido\ representa\ un\ pedido\ realizado\ por\ un\ cliente\ para\ un\ producto\ espec\u00EDfico\ en\ una\ cantidad\ determinada.\r\n\ Cada\ instancia\ de\ esta\ clase\ contiene\ informaci\u00F3n\ sobre\ el\ cliente\ que\ realiza\ el\ pedido,\ el\ producto\ solicitado\r\n\ y\ la\ cantidad\ en\ kilogramos\ del\ producto\ solicitado.\r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\r\n
+comment1.params=cliente\ producto\ cantidad
+comment1.target=Pedido(Cliente,\ Producto,\ int)
+comment1.text=\r\n\ Constructor\ para\ objetos\ de\ la\ clase\ Pedido.\r\n\ \r\n\ @param\ cliente\ El\ cliente\ que\ realiza\ el\ pedido.\r\n\ @param\ producto\ El\ producto\ solicitado\ en\ el\ pedido.\r\n\ @param\ cantidad\ La\ cantidad\ del\ producto\ solicitado\ en\ kilogramos.\r\n
+comment2.params=
+comment2.target=Cliente\ getCliente()
+comment2.text=\r\n\ Obtiene\ el\ cliente\ que\ realiz\u00F3\ este\ pedido.\r\n\ \r\n\ @return\ El\ objeto\ Cliente\ que\ realiz\u00F3\ el\ pedido.\r\n
+comment3.params=
+comment3.target=Producto\ getProducto()
+comment3.text=\r\n\ Obtiene\ el\ producto\ asociado\ a\ este\ pedido.\r\n\ \r\n\ @return\ El\ objeto\ Producto\ solicitado\ en\ este\ pedido.\r\n
+comment4.params=
+comment4.target=int\ getCantidad()
+comment4.text=\r\n\ Obtiene\ la\ cantidad\ del\ producto\ solicitado\ en\ este\ pedido.\r\n\ \r\n\ @return\ La\ cantidad\ del\ producto\ solicitado\ en\ kilogramos.\r\n
+numComments=5

@@ -6,4 +6,5 @@ comment1.target=NoPerecedero(java.lang.String,\ float,\ float)
 comment1.text=\r\n\ Constructor\ para\ objetos\ de\ la\ clase\ NoPerecedero.\r\n\ @param\ nombre\ nombre\ del\ producto.\r\n\ @param\ rendimiento\ rendimiento\ (en\ tm.)\ del\ produto\ por\ hect\u00E1reas.\r\n\ @param\ precio\ precio\ (en\ Euros)\ de\ referencia\ del\ producto.\r\n
 comment2.params=
 comment2.target=java.lang.String\ toString()
+comment2.text=\r\n\ Devuelve\ una\ representaci\u00F3n\ en\ forma\ de\ cadena\ (String)\ de\ la\ informaci\u00F3n\ relevante\ del\ producto.\r\n\ @return\ Una\ cadena\ que\ representa\ la\ informaci\u00F3n\ del\ producto\r\n
 numComments=3
