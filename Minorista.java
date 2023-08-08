@@ -16,4 +16,12 @@ public class Minorista extends Cliente {
     public Minorista(String nombre, int distancia) {
         super(nombre, distancia);
     }   
+    
+    /**
+     * Devuelve una representación en forma de cadena de caracteres del objeto Minorista.
+     * @return representación en forma de cadena de caracteres del objeto Minorista.
+     */
+    public String toString(){
+        return getNombre() + " MINORISTA";
+    }
 }

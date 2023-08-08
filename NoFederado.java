@@ -27,7 +27,6 @@ public abstract class NoFederado extends Productor
 
     /**
      * Método abstracto para obtener la lista de productos del productor no federado.
-     *
      * @return Una lista de objetos ProductoProductor que representa los productos asignados al productor no federado.
      */
     public abstract List<ProductoProductor> getProductos();

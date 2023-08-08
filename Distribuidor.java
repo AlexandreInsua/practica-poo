@@ -14,4 +14,12 @@ public class Distribuidor extends Cliente {
     public Distribuidor(String nombre, int distancia) {
         super(nombre, distancia);
     }
+    
+    /**
+     * Devuelve una representación en forma de cadena de caracteres del objeto Distribuidor.
+     * @return representación en forma de cadena de caracteres del objeto Distribuidor.
+     */
+    public String toString(){
+        return getNombre() + " DISTRIBUIDOR";
+    }
 }
