@@ -9,5 +9,5 @@ comment2.target=boolean\ asignarProducto(ProductoProductor)
 comment2.text=\r\n\ M\u00E9todo\ abstracto\ para\ asignar\ un\ producto\ al\ productor\ no\ federado.\r\n\ @param\ producto\ El\ producto\ a\ ser\ asignado\ al\ productor\ no\ federado.\r\n\ @return\ true\ si\ el\ producto\ se\ asign\u00F3\ correctamente,\ false\ en\ caso\ contrario.\r\n
 comment3.params=
 comment3.target=java.util.List\ getProductos()
-comment3.text=\r\n\ M\u00E9todo\ abstracto\ para\ obtener\ la\ lista\ de\ productos\ del\ productor\ no\ federado.\r\n\r\n\ @return\ Una\ lista\ de\ objetos\ ProductoProductor\ que\ representa\ los\ productos\ asignados\ al\ productor\ no\ federado.\r\n
+comment3.text=\r\n\ M\u00E9todo\ abstracto\ para\ obtener\ la\ lista\ de\ productos\ del\ productor\ no\ federado.\r\n\ @return\ Una\ lista\ de\ objetos\ ProductoProductor\ que\ representa\ los\ productos\ asignados\ al\ productor\ no\ federado.\r\n
 numComments=4

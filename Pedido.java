@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 /**
  * La clase Pedido representa un pedido realizado por un cliente para un producto específico en una cantidad determinada.
@@ -9,7 +12,12 @@
  */
 public class Pedido
 {
-
+    // Número de pedido
+    private long id;
+    // Fecha de creación del pedido
+    private LocalDate creacion;
+    // Fecha de entrega del pedido
+    private LocalDate entrega;  
     // Cliente que realiza el pedido
     private Cliente cliente;
     // Producto del pedido
@@ -29,12 +37,37 @@ public class Pedido
         this.cliente = cliente;
         this.producto = producto;
         this.cantidad = cantidad;
+        creacion = LocalDate.now();
+        entrega = LocalDate.now().plusDays(10);
+        id = LocalDateTime.now().atZone(ZoneId.of("UTC")).toInstant().toEpochMilli();
+    }
 
+    /**
+     * Devuelve el identificador único del pedido.
+     * @return El identificador único del pedido.
+     */
+    public long getId(){
+        return id;
+    }
+
+    /**
+     * Devuelve la fecha de creación del pedido.
+     * @return La fecha de creación del pedido.
+     */
+    public LocalDate getCreacion(){
+        return creacion;
+    }
+
+    /**
+     * Devuelve la fecha de entrega prevista para el pedido.
+     * @return La fecha de entrega prevista para el pedido.
+     */
+    public LocalDate getEntrega(){
+        return entrega;
     }
 
     /**
      * Obtiene el cliente que realizó este pedido.
-     * 
      * @return El objeto Cliente que realizó el pedido.
      */
     public Cliente getCliente() {
@@ -43,7 +76,6 @@ public class Pedido
 
     /**
      * Obtiene el producto asociado a este pedido.
-     * 
      * @return El objeto Producto solicitado en este pedido.
      */
     public Producto getProducto() {
@@ -52,7 +84,6 @@ public class Pedido
 
     /**
      * Obtiene la cantidad del producto solicitado en este pedido.
-     * 
      * @return La cantidad del producto solicitado en kilogramos.
      */
     public int getCantidad() {
