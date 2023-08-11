@@ -22,6 +22,6 @@ public class Minorista extends Cliente {
      * @return representación en forma de cadena de caracteres del objeto Minorista.
      */
     public String toString(){
-        return getNombre() + " MINORISTA";
+        return getNombre() + " MINORISTA. Distancia " + getDistancia()+" km.";
     }
 }

@@ -19,7 +19,9 @@ public class PeqProductor extends NoFederado
     private float extensionTotal;
     // Límite de extensión total máxima para los pequeños produtores
     private final int EXTENSION_LIMITE = 5;
-
+    // Límite de productos de un pequeño productor
+    private final int MAX_PRODUCTOS = 5; 
+    
     /**
      * Constructor de la clase PeqProductor.
      *
@@ -87,9 +89,10 @@ public class PeqProductor extends NoFederado
     public String toString(){
         return getNombre() + " Pequeño productor" + listProducts();
     }
-
+    
+    
     private void checkProductNumber() throws Exception {
-        if (contador >= 5) {
+        if (contador >= MAX_PRODUCTOS ) {
             throw new Exception("Un pequeño productor sólo puede cultivar cinco productos diferentes.");
         }
     }

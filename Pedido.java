@@ -24,7 +24,9 @@ public class Pedido
     private Producto producto;
     // Cantidad del pedido en kilogramos
     private int cantidad;
-
+    // Estado del pedido
+    private PedidoEstado estado;
+    
     /**
      * Constructor para objetos de la clase Pedido.
      * 
@@ -40,6 +42,8 @@ public class Pedido
         creacion = LocalDate.now();
         entrega = LocalDate.now().plusDays(10);
         id = LocalDateTime.now().atZone(ZoneId.of("UTC")).toInstant().toEpochMilli();
+        estado = PedidoEstado.PENDIENTE;
+        
     }
 
     /**

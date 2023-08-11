@@ -50,7 +50,7 @@ public class Logistica
         } 
         nombre = n;
         precioGLP = pglp;
-        precioPLP =pplp;
+        precioPLP = pplp;
         precioGLNP = pglnp;                ;
         precioPLNP = pplnp;
 
@@ -84,6 +84,14 @@ public class Logistica
         return sumaCostesTonelada;
     }
 
+    
+    public String toString(){
+        return getNombre() 
+        + "\n\t  Oferta de precios para grandes y pequeños trayectos."
+        + "\n\t  Productos perecederos:  " + precioGLP + " €/km y " + precioPLP + " €/km"
+        + "\n\t  Productos no perecederos:  " + precioGLNP + " €/km y " + precioPLNP + " €/km"
+        ; 
+    }
     /**
      * Valida los precios de los los costes de los diferentes tipos de logistica
      * en función del tipo de producto.

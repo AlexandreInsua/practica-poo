@@ -20,6 +20,6 @@ public class Distribuidor extends Cliente {
      * @return representación en forma de cadena de caracteres del objeto Distribuidor.
      */
     public String toString(){
-        return getNombre() + " DISTRIBUIDOR";
+        return getNombre() + " DISTRIBUIDOR. Distancia " + getDistancia()+" km.";
     }
 }

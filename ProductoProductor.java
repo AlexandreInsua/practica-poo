@@ -11,21 +11,26 @@ public class ProductoProductor {
     private Producto producto;
     // La extensión del cultivo asignada al productor
     private float extension; 
-    // La extensión del cultivo disponible para su venta
+    // Cantidad del cultivo en kg producida anualmente
+    private float produccion;
+    // La cantidad del cultivo en kg disponible para su venta
     private float disponible;
     // Bandera que indica si el producto está federado
     private boolean federado;
-
+    // Tonelada métrica en kg
+    private final int TM = 1000;
+    
     /**
      * Constructor para objetos de la clase ProductoProductor.
      * 
      * @param produto El producto a asignar al productor.
-     * @param extension La extensión del cultivo a asignar al productor.
+     * @param extension La extensión del cultivo en ha que se va a asignar al productor.
      */
     public ProductoProductor(Producto producto, float extension) {
         this.producto = producto;
         this.extension = extension ;
-        disponible = extension ;
+        produccion = producto.getRendimiento() * TM * extension;
+        disponible = producto.getRendimiento() * TM * extension ;
         federado = false;
     }
 
@@ -55,6 +60,10 @@ public class ProductoProductor {
         disponible = d;
     }
 
+    public float getProduccion(){
+        return produccion; 
+    }
+        
     public float getDisponible() {
         return disponible;
     }

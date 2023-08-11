@@ -24,6 +24,6 @@ public class NoPerecedero extends Producto
      * @return Una cadena que representa la información del producto
      */
     public String toString(){
-        return getNombre() + ". No perecedero. Precio de ref.: " + getPrecio() + "€. Producción anual: " + getProduccion()+ "Tm. Disponible: " + getDisponible() + "Tm";
+        return getNombre() + ". No perecedero. Precio de ref.: " + getPrecio() + "€. Producción anual: " + getProduccion()+ "kg. Disponible: " + getDisponible() + "kg";
     }
 }
