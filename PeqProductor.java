@@ -70,6 +70,21 @@ public class PeqProductor extends NoFederado
     public List<ProductoProductor> getProductos(){
         return Arrays.asList(productos);
     }
+    
+    /**
+     * Busca y devuelve un objeto de tipo ProductoProductor que coincida con el nombre especificado.
+     * 
+     * @param nombreProducto El nombre del producto que se desea buscar.
+     * @return El objeto ProductoProductor que coincide con el nombre especificado, o null si no se encuentra ninguna coincidencia.
+     */
+    public ProductoProductor buscarProducto(String nombreProducto){
+        for (ProductoProductor producto : productos) {
+            if (producto.getProducto().getNombre().equals(nombreProducto)) {
+                return producto;
+            }
+        }
+        return null;    
+    }
 
     /**
      * Imprime la lista de productos asignados al pequeño productor.

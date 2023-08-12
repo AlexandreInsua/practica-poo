@@ -80,7 +80,7 @@ public class Cooperativa
         NoFederado soniaR = new PeqProductor("Sonia R.");
         soniaR.asignarProducto(pp5);
         soniaR.asignarProducto(pp6);
-        
+
         NoFederado celsoP = new GranProductor("Celso P.");
         celsoP.asignarProducto(pp7);
 
@@ -109,16 +109,22 @@ public class Cooperativa
         logisticas.add(sutrans);
         logisticas.add(segura);
 
-        crearPedido(reginaC, trigo, 50, sutrans);
-        crearPedido(gadial, algodon, 1000, segura);
-        crearPedido(disnosa, aceite, 2000, sutrans);
-
+        
         listarProductos();
         listarProductores();
         listarFederados();
         listarClientes();
         listarLogísticas();
+        
+        crearPedido(reginaC, trigo, 50, sutrans);
+        crearPedido(gadial, algodon, 1000, segura);
+        crearPedido(disnosa, aceite, 2000, sutrans);
+        
         listarPedidos();
+        
+        listarProductos();
+        listarProductores();
+        listarFederados();
     }
 
     // PRODUCTOS
@@ -268,14 +274,24 @@ public class Cooperativa
         try {
             if(validateOrder(cliente, producto, cantidad)){
                 Pedido pedido = new Pedido(cliente, producto, cantidad);
-                // TODO actualizar costes
+                // ENCAPSULAR actualizar costes
                 pedido.setCoste(pedido.getCantidad() * pedido.getProducto().getPrecio());
                 pedido.setBeneficio(pedido.getCoste() * getProfitMarginConst(pedido) );
                 pedido.setLogistica(logistica.calcularPrecioLogisticaPedido(pedido));
                 pedido.setIva((pedido.getCoste() + pedido.getBeneficio() + pedido.getLogistica() ) * getVATConst(pedido));
                 pedido.setTotal(pedido.getCoste() + pedido.getBeneficio() + pedido.getLogistica() + pedido.getIva());
 
-                    // TODO actualizar cantidades disponibles
+                // TODO actualizar cantidades disponibles
+                ArrayList<NoFederado> nf = pedido.getProducto().getProdutores();
+                // non funciona
+                nf.forEach(productor -> {
+                        ProductoProductor productoProductor = productor.buscarProducto(pedido.getProducto().getNombre());
+                        float ratio = productoProductor.getDisponible() / pedido.getProducto().getDisponible();
+                        float partida = pedido.getCantidad() * ratio;
+                        float nuevoDisponible = productoProductor.getDisponible() - partida;
+                        productoProductor.setDisponible(nuevoDisponible);
+                    });
+                producto.setDisponible(producto.getDisponible() - cantidad);
 
                 pedidos.add(pedido);
                 return true;
@@ -292,7 +308,7 @@ public class Cooperativa
     }
 
     public void listarPedidos(){
-        System.out.println("\nLISTAR PEDIDOS");
+        System.out.println("\nLISTA DE PEDIDOS");
         for(Pedido pedido: pedidos){
             System.out.println(" " + pedido.toString());
         }
@@ -322,7 +338,7 @@ public class Cooperativa
         }
         return true;
     }
-    
+
     // obtiene la constante para calcular el margen de beneficio   
     private float getProfitMarginConst(Pedido pedido){
         if (pedido.getCliente() instanceof Distribuidor){
@@ -330,7 +346,7 @@ public class Cooperativa
         }
         return MARGEN_MINORISTA;
     }
-    
+
     // obiene la constante para calcular la cantidad de iva
     private float getVATConst(Pedido pedido){
         if (pedido.getCliente() instanceof Minorista){
@@ -338,6 +354,6 @@ public class Cooperativa
         }
         return 0;
     }
-    
+
 }
 

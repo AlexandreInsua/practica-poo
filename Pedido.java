@@ -268,7 +268,8 @@ public class Pedido
      */
     public String toString(){
         return "Nº PEDIDO: "+ getId() +" Fecha: "+getCreacionString() +" Entrega: "+ getEntregaString() 
-        +" Estado: "+ getEstado() +" Cliente: "+ getCliente().getNombre() +"(" + getCliente().getClass().getName() + ") Producto: "+ getProducto().getNombre() 
+        +" Estado: "+ getEstado() 
+        +"\n\tCliente: "+ getCliente().getNombre() +"(" + getCliente().getClass().getName() + ") Producto: "+ getProducto().getNombre() 
         +"("+ getProducto().getPrecio() + " €/kg)  Cantidad: "+ getCantidad()+" kg" 
         +"\n\tBruto: "+ getCosteString() +"€ Logística: "+ getLogisticaString() + "€ Beneficio: "+ getBeneficioString() + getIvaString() + "€ Total: "+ getTotalString() + "€";
     }

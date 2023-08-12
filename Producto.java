@@ -16,7 +16,7 @@ public abstract class Producto
     // precio de referencia del producto en Euros
     private float precio; 
     // Productores que cultivan el producto
-    private ArrayList<Productor> productores;
+    private ArrayList<NoFederado> productores;
     // Cantidad total producida anualmente
     private float produccion;
     // Cantidad de producto disponible
@@ -80,10 +80,18 @@ public abstract class Producto
     }
 
     /**
+     * Obtiene la lista de productores que cultivan el producto.
+     * @return La lista de productores que cultivan el producto
+     */
+    public ArrayList<NoFederado> getProdutores(){
+        return productores;
+    }
+    
+    /**
      * Agrega un productor a la lista de productores que cultivan este producto.
      * @param productor El productor a agregar.
      */
-    public void addProductor(Productor productor){
+    public void addProductor(NoFederado productor){
         productores.add(productor);
     }
 

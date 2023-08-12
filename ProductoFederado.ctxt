@@ -1,13 +1,16 @@
 #BlueJ class context
 comment0.target=ProductoFederado
-comment0.text=\r\n\ ProductoFederado\ .\r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira.\ \r\n\ @version\ \r\n
-comment1.params=pro\ p
+comment0.text=\r\n\ La\ clase\ ProductoFederado\ representa\ un\ producto\ federado,\ que\ es\ producido\ por\ un\ peque\u00F1o\ productor\ y\ es\ usado\ por\ un\ Productor\ Federado.\r\n\ Esta\ clase\ permite\ acceder\ a\ la\ informaci\u00F3n\ del\ productor\ y\ del\ producto\ asociado.\r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira.\r\n\ @version\ 1.0\r\n
+comment1.params=productor\ producto
 comment1.target=ProductoFederado(Productor,\ ProductoProductor)
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ ProductoFederado\r\n
+comment1.text=\r\n\ Constructor\ para\ objetos\ de\ la\ clase\ ProductoFederado.\r\n\ \r\n\ @param\ productor\ El\ productor\ asociado\ al\ producto\ federado.\r\n\ @param\ producto\ El\ producto\ de\ productor\ asociado\ al\ producto\ federado.\r\n
 comment2.params=
 comment2.target=Productor\ getProdutor()
+comment2.text=\r\n\ Obtiene\ el\ productor\ asociado\ al\ producto\ federado.\r\n\ \r\n\ @return\ El\ productor\ asociado.\r\n
 comment3.params=
 comment3.target=ProductoProductor\ getProductoProductor()
+comment3.text=\r\n\ Obtiene\ el\ producto\ de\ productor\ asociado\ al\ producto\ federado.\r\n\ \r\n\ @return\ El\ producto\ de\ productor\ asociado.\r\n
 comment4.params=
 comment4.target=java.lang.String\ toString()
+comment4.text=\r\n\ Retorna\ una\ representaci\u00F3n\ en\ forma\ de\ cadena\ de\ caracteres\ del\ producto\ federado.\r\n\ \r\n\ @return\ Una\ cadena\ que\ contiene\ informaci\u00F3n\ sobre\ el\ productor,\ la\ extensi\u00F3n\ y\ la\ disponibilidad\ del\ producto.\r\n
 numComments=5
