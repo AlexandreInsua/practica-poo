@@ -26,7 +26,7 @@ public class Pedido
     private int cantidad;
     // Estado del pedido
     private PedidoEstado estado;
-    
+
     /**
      * Constructor para objetos de la clase Pedido.
      * 
@@ -43,7 +43,7 @@ public class Pedido
         entrega = LocalDate.now().plusDays(10);
         id = LocalDateTime.now().atZone(ZoneId.of("UTC")).toInstant().toEpochMilli();
         estado = PedidoEstado.PENDIENTE;
-        
+
     }
 
     /**
@@ -92,5 +92,23 @@ public class Pedido
      */
     public int getCantidad() {
         return cantidad;
+    }
+
+    /**
+     * Obtiene el estado del pedido
+     * @return El estado del producto
+     */
+    public PedidoEstado getEstado(){
+        return estado;
+    }
+
+    /**
+     *  Devuelve una representación en forma de cadena de caracteres del objeto Pedido.
+     *  @return la representación en forma de cadena de caracteres del objeto Pedido.
+     */
+    public String toString(){
+        return "Nº PEDIDO: "+ getId() +" Fecha: "+getCreacion() +" Entrega: "+ getEntrega() 
+        +" Estado: "+ getEstado() +" Cliente: "+ getCliente().getNombre() +" Producto: "+ getProducto().getNombre()
+        +" Cantidad: "+ getCantidad()+" kg";
     }
 }
