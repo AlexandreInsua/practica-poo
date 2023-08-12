@@ -48,7 +48,7 @@ public class Cooperativa
 
     // TEST
     public void test(){
-        Producto aceite = new NoPerecedero("Aceite", 3.5f, 0.8f);
+        Producto aceite = new NoPerecedero("Aceite", 3.5f, 0.5f);
         Producto algodon = new NoPerecedero("Algodón", 1.5f, 0.23f);
         Producto naranjas = new Perecedero("Naranjas", 2.3f, 0.55f);
         Producto tomates = new Perecedero("Tomates", 6.0f, 0.95f);
@@ -70,6 +70,7 @@ public class Cooperativa
         ProductoProductor pp4 = new ProductoProductor(ciruelas,2.6f);
         ProductoProductor pp5 = new ProductoProductor(trigo,1.3f);
         ProductoProductor pp6 = new ProductoProductor(algodon,0.2f);
+        ProductoProductor pp7 = new ProductoProductor(aceite, 5f);
 
         NoFederado juanP = new PeqProductor("Juan P.");     
         juanP.asignarProducto(pp1);
@@ -79,17 +80,21 @@ public class Cooperativa
         NoFederado soniaR = new PeqProductor("Sonia R.");
         soniaR.asignarProducto(pp5);
         soniaR.asignarProducto(pp6);
+        
+        NoFederado celsoP = new GranProductor("Celso P.");
+        celsoP.asignarProducto(pp7);
 
         agregarProductor(juanP);
         agregarProductor(soniaR);
+        agregarProductor(celsoP);
 
         Federado algodonFederado = new Federado("Algodón");
         federados.add(algodonFederado);
         algodonFederado.federarProducto(juanP, pp2);
         algodonFederado.federarProducto(soniaR, pp6);
 
-        Distribuidor gadial = new Distribuidor("Gadial S.A.", 180);
-        Distribuidor disnosa = new Distribuidor("Disnosa", 205);
+        Distribuidor gadial = new Distribuidor("Gadial S.A.", 200);
+        Distribuidor disnosa = new Distribuidor("Disnosa", 180);
         Minorista reginaC = new Minorista("Regina C.", 5);
         Minorista millanD = new Minorista("Millán D.", 9);
 
@@ -98,14 +103,15 @@ public class Cooperativa
         clientes.add(reginaC);
         clientes.add(millanD);
 
-        Logistica l1 = new Logistica("Sutrans S.L.", 0.06f, 0.04f, 0.05f, 0.01f);
-        Logistica l2 = new Logistica("Hnos. Segura S.L.", 0.05f, 0.04f, 0.03f, 0.02f);
+        Logistica sutrans = new Logistica("Sutrans S.L.", 0.06f, 0.04f, 0.05f, 0.01f);
+        Logistica segura = new Logistica("Hnos. Segura S.L.", 0.05f, 0.04f, 0.03f, 0.02f);
 
-        logisticas.add(l1);
-        logisticas.add(l2);
+        logisticas.add(sutrans);
+        logisticas.add(segura);
 
-        crearPedido(reginaC, trigo, 50, l1);
-        crearPedido(gadial, algodon, 1000, l2);
+        crearPedido(reginaC, trigo, 50, sutrans);
+        crearPedido(gadial, algodon, 1000, segura);
+        crearPedido(disnosa, aceite, 2000, sutrans);
 
         listarProductos();
         listarProductores();

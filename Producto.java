@@ -28,11 +28,11 @@ public abstract class Producto
      * @param rendimiento rendimiento (en tm.) del produto por hectáreaf.
      * @param precio precio (en Euros) de referencia del producto.
      */
-    public Producto(String n, float r, float p)
+    public Producto(String nombre, float rendimiento, float precio)
     {
-        nombre = n;
-        rendimiento = r;
-        precio = p;
+        this.nombre = nombre;
+        this.rendimiento = rendimiento;
+        this.precio = precio;
 
         productores = new ArrayList();
         produccion = 0;
@@ -51,8 +51,8 @@ public abstract class Producto
      * Establece el rendimiento del producto.
      * @param rendimiento El nuevo rendimiento del producto (en toneladas métricas por hectárea).
      */
-    public void setRendimiento(float r){
-        rendimiento = r;
+    public void setRendimiento(float rendimiento){
+        this.rendimiento = rendimiento;
     }
 
     /**
@@ -67,8 +67,8 @@ public abstract class Producto
      * Establece el precio de referencia del producto.
      * @param precio El nuevo precio de referencia del producto (en Euros).
      */
-    public void setPrecio(float p){
-        precio = p;
+    public void setPrecio(float precio ){
+        this.precio = precio;
     }
 
     /**
@@ -83,16 +83,16 @@ public abstract class Producto
      * Agrega un productor a la lista de productores que cultivan este producto.
      * @param productor El productor a agregar.
      */
-    public void addProductor(Productor p){
-        productores.add(p);
+    public void addProductor(Productor productor){
+        productores.add(productor);
     }
 
     /**
      * Establece la cantidad total producida anualmente del producto.
      * @param produccion La nueva cantidad total producida anualmente del producto.
      */
-    public void setProduccion(float p){
-        produccion = p;
+    public void setProduccion(float produccion ){
+        this.produccion = produccion;
     }
 
     /**
@@ -107,8 +107,8 @@ public abstract class Producto
      * Establece la cantidad disponible del producto en inventario.
      * @param disponible La nueva cantidad disponible del producto.
      */
-    public void setDisponible(float d){
-        disponible = d;
+    public void setDisponible(float disponible){
+        this.disponible = disponible;
     }
 
     /**

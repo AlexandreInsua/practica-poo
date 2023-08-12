@@ -16,4 +16,6 @@ comment4.text=\r\n\ Devuelve\ la\ lista\ de\ productos\ asignados\ al\ productor
 comment5.params=p
 comment5.target=void\ checkIsProduct(ProductoProductor)
 comment5.text=\r\n\ Verifica\ si\ un\ producto\ ya\ ha\ sido\ asignado\ al\ gran\ productor.\r\n\ \r\n\ @param\ p\ El\ producto\ a\ verificar.\r\n\ @throws\ Exception\ si\ el\ producto\ ya\ ha\ sido\ asignado\ previamente.\r\n
-numComments=6
+comment6.params=
+comment6.target=java.lang.String\ listProducts()
+numComments=7

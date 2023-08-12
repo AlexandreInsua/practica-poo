@@ -30,7 +30,7 @@ public class GranProductor extends NoFederado {
      * @return Una representación en forma de cadena de caracteres del objeto GranProductor.
      */
     public String toString() {
-        return getNombre() + " Gran productor";
+        return getNombre() + " Gran productor" + listProducts();
     }
 
     /**
@@ -73,5 +73,16 @@ public class GranProductor extends NoFederado {
                 throw new Exception("No se puede agregar el mismo producto por segunda vez");
             }
         }
+    }
+
+    private String listProducts(){
+        String productList = ""; 
+
+        for(ProductoProductor p: productos){
+            if (p != null && p.getFedederado() != true) {
+                productList += "\n\t" + p.toString();
+            }
+        }
+        return productList; 
     }
 }
