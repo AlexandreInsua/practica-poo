@@ -10,8 +10,11 @@ import java.util.List;
 public class Cooperativa
 {
     private final int LIMITE_PRODUCCION = 5;
-    private final int PEDIDO_MIN_DISTRIDOR = 1000;
+    private final int PEDIDO_MIN_DISTRIBUIDOR = 1000;
     private final int PEDIDO_MAX_MINORISTA = 100;
+    private final float MARGEN_DISTRIBUIDOR = 0.05f;
+    private final float MARGEN_MINORISTA = 0.15f;
+    private final float IVA = 0.10f;
 
     ArrayList<Producto> productos;
     ArrayList<NoFederado> productores;
@@ -102,6 +105,7 @@ public class Cooperativa
         logisticas.add(l2);
 
         crearPedido(reginaC, trigo, 50, l1);
+        crearPedido(gadial, algodon, 1000, l2);
 
         listarProductos();
         listarProductores();
@@ -256,9 +260,16 @@ public class Cooperativa
     // PEDIDOS
     public boolean crearPedido( Cliente cliente, Producto producto, int cantidad, Logistica logistica){
         try {
-            if(createOrder(cliente, producto, cantidad)){
+            if(validateOrder(cliente, producto, cantidad)){
                 Pedido pedido = new Pedido(cliente, producto, cantidad);
                 // TODO actualizar costes
+                pedido.setCoste(pedido.getCantidad() * pedido.getProducto().getPrecio());
+                pedido.setBeneficio(pedido.getCoste() * getProfitMarginConst(pedido) );
+                pedido.setLogistica(logistica.calcularPrecioLogisticaPedido(pedido));
+                pedido.setIva((pedido.getCoste() + pedido.getBeneficio() + pedido.getLogistica() ) * getVATConst(pedido));
+                pedido.setTotal(pedido.getCoste() + pedido.getBeneficio() + pedido.getLogistica() + pedido.getIva());
+
+                    // TODO actualizar cantidades disponibles
 
                 pedidos.add(pedido);
                 return true;
@@ -281,17 +292,16 @@ public class Cooperativa
         }
     }  
 
-    private boolean createOrder(Cliente cliente, Producto producto, int cantidad){
+    // Valida el pedido
+    private boolean validateOrder(Cliente cliente, Producto producto, int cantidad){
         if (validateAmountByOrder(cliente, cantidad) && validateAvailableAmount(producto, cantidad)){
-            // TODO actualizar cantidades disponibles
             return true;
-        } else {
-            return false;
-        }
+        } 
+        return false;
     }
-
+    // Valida la cantidad del pedido en funcion del tipo de cliente
     private boolean validateAmountByOrder(Cliente cliente, int cantidad){
-        if (cliente instanceof Distribuidor && cantidad < PEDIDO_MIN_DISTRIDOR){
+        if (cliente instanceof Distribuidor && cantidad < PEDIDO_MIN_DISTRIBUIDOR){
             throw new IllegalArgumentException("El pedido de un distribuidor debe ser como mínimo de 1000kg");
         }
         if (cliente instanceof Minorista && cantidad > PEDIDO_MAX_MINORISTA){
@@ -299,12 +309,29 @@ public class Cooperativa
         }
         return true;
     }
-
+    // valida que la cantidad del pedido esté disponible
     private boolean validateAvailableAmount(Producto producto, int cantidad){
         if (producto.getDisponible() < cantidad){
             throw new IllegalArgumentException("La cantidad disponible de " + producto.getNombre() + " es de " + producto.getDisponible() +" kg y se piden " + cantidad + " kg. No se puede realizar el pedido." );
         }
         return true;
     }
+    
+    // obtiene la constante para calcular el margen de beneficio   
+    private float getProfitMarginConst(Pedido pedido){
+        if (pedido.getCliente() instanceof Distribuidor){
+            return MARGEN_DISTRIBUIDOR;
+        }
+        return MARGEN_MINORISTA;
+    }
+    
+    // obiene la constante para calcular la cantidad de iva
+    private float getVATConst(Pedido pedido){
+        if (pedido.getCliente() instanceof Minorista){
+            return IVA;
+        }
+        return 0;
+    }
+    
 }
 

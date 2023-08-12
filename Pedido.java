@@ -1,6 +1,8 @@
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 /**
  * La clase Pedido representa un pedido realizado por un cliente para un producto específico en una cantidad determinada.
@@ -25,7 +27,19 @@ public class Pedido
     // Cantidad del pedido en kilogramos
     private int cantidad;
     // Estado del pedido
-    private PedidoEstado estado;
+    private PedidoEstado estado; 
+    // coste del producto en €
+    private float coste;
+    // Coste de logistica en €
+    private float logistica;
+    // Cantidad de margen de beneficio de la cooperativa en €
+    private float beneficio;
+    // Cantidad de IVA aplicado en €
+    private float iva;
+    // Cantidad e coste total en €
+    private float total;
+    // variable auxiliar para formatear precios
+    private DecimalFormat priceFormatter;
 
     /**
      * Constructor para objetos de la clase Pedido.
@@ -42,8 +56,13 @@ public class Pedido
         creacion = LocalDate.now();
         entrega = LocalDate.now().plusDays(10);
         id = LocalDateTime.now().atZone(ZoneId.of("UTC")).toInstant().toEpochMilli();
-        estado = PedidoEstado.PENDIENTE;
-
+        estado = PedidoEstado.PENDIENTE; 
+        coste = 0;
+        logistica = 0;
+        beneficio = 0;
+        iva = 0;
+        total = 0;
+        priceFormatter = new DecimalFormat("#.##");
     }
 
     /**
@@ -63,11 +82,27 @@ public class Pedido
     }
 
     /**
+     * Devuelve la fecha de creación del pedido en formato de string "dd/MM/yyyy".
+     * @return La fecha de creación del pedido en formato de string "dd/MM/yyyy".
+     */
+    public String getCreacionString(){
+        return creacion.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    /**
      * Devuelve la fecha de entrega prevista para el pedido.
      * @return La fecha de entrega prevista para el pedido.
      */
     public LocalDate getEntrega(){
         return entrega;
+    }
+
+    /**
+     * Devuelve la fecha de entrega del pedido en formato de string "dd/MM/yyyy".
+     * @return La fecha de entrega del pedido en formato de string "dd/MM/yyyy".
+     */
+    public String getEntregaString(){
+        return entrega.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     /**
@@ -103,12 +138,138 @@ public class Pedido
     }
 
     /**
+     * Establece el coste de la mercancía del pedido en €.
+     * @param El coste de la mercancía del pedido en €.
+     */
+    public void setCoste(float coste){
+        this.coste = coste;
+    }
+
+    /**
+     * Obtiene el coste de la mercancía del pedido en €.
+     * @return El coste de la mercancía del pedido en €.
+     */
+    public float getCoste(){
+        return coste;
+    }
+
+    /**
+     * Obtiene una representación en forma de cadena de caracteres del coste de la mercancía del pedido en €.
+     * @return El coste de la mercancía del pedido en €.
+     */
+    public String getCosteString(){
+        return priceFormatter.format(coste);
+    }
+
+    /**
+     * Establece el coste de la logística del pedido en €.
+     * @param El coste de la logística del pedido en €.
+     */
+    public void setLogistica(float logistica){
+        this.logistica = logistica;
+    }
+
+    /**
+     * Obtiene el coste de la logística del pedido en €.
+     * @return El coste de la logística del pedido en €.
+     */
+    public float getLogistica(){
+        return logistica;
+    }
+    
+      /**
+     * Obtiene una representación en forma de cadena de caracteres del coste de la logística del pedido en €.
+     * @return El coste de la logística del pedido en €.
+     */
+    public String getLogisticaString(){
+        return priceFormatter.format(logistica);
+    }
+
+    /**
+     * Establece el margen beneficio de la cooperativa en €.
+     * @param El margen beneficio de la cooperativa pedido en €.
+     */
+    public void setBeneficio(float beneficio){
+        this.beneficio = beneficio;
+    }
+
+    /**
+     * Obtiene el margen beneficio de la cooperativa en €.
+     * @return El margen beneficio de la cooperativa en €.
+     */
+    public float getBeneficio(){
+        return beneficio;
+    }
+    
+    /**
+     * Obtiene una representación en forma de cadena de caracteres del margen beneficio de la cooperativa en €.
+     * @return El margen beneficio de la cooperativa en €.
+     */
+    public String getBeneficioString(){
+        return priceFormatter.format(beneficio);
+    }
+
+    /**
+     * Establece la cantidad de iva del pedido en €.
+     * @param La cantidad de iva pedido en €.
+     */
+    public void setIva(float iva){
+        this.iva = iva;
+    }
+
+    /**
+     * Obtiene la cantidad de iva  del pedido en €.
+     * @return La cantidad de iva  del pedido en €.
+     */
+    public float getIva(){
+        return iva;
+    }
+
+    /**
+     * Obtiene una representación en forma de cadena de caracteres del IVA 
+     * si el cliente es una instancia de la clase Minorista o una cadena vacía en caso contrario;
+     * @return una representación en forma de cadena de caracteres del IVA.
+     */
+    public String getIvaString(){
+        if (cliente instanceof Minorista){
+            return ",€ IVA: " + priceFormatter.format(iva);
+        }
+        return "";
+    }
+
+    /**
+     * Establece el coste total del pedido en €.
+     * @param El coste total del pedido en €.
+     */
+    public void setTotal(float total){
+        this.total = total;
+    }
+
+    /**
+     * Obtiene el coste total del pedido en €.
+     * @return el coste total del pedido en €.
+     */
+    public float getTotal(){
+        return total;
+    }
+    
+      /**
+     * Obtiene una representación en forma de cadena de caracteres del coste total del pedido en €.
+     * @return el coste total del pedido en €.
+     */
+    public String getTotalString(){
+        return priceFormatter.format(total);
+    }
+
+
+    /**
      *  Devuelve una representación en forma de cadena de caracteres del objeto Pedido.
      *  @return la representación en forma de cadena de caracteres del objeto Pedido.
      */
     public String toString(){
-        return "Nº PEDIDO: "+ getId() +" Fecha: "+getCreacion() +" Entrega: "+ getEntrega() 
-        +" Estado: "+ getEstado() +" Cliente: "+ getCliente().getNombre() +" Producto: "+ getProducto().getNombre()
-        +" Cantidad: "+ getCantidad()+" kg";
+        return "Nº PEDIDO: "+ getId() +" Fecha: "+getCreacionString() +" Entrega: "+ getEntregaString() 
+        +" Estado: "+ getEstado() +" Cliente: "+ getCliente().getNombre() +"(" + getCliente().getClass().getName() + ") Producto: "+ getProducto().getNombre() 
+        +"("+ getProducto().getPrecio() + " €/kg)  Cantidad: "+ getCantidad()+" kg" 
+        +"\n\tBruto: "+ getCosteString() +"€ Logística: "+ getLogisticaString() + "€ Beneficio: "+ getBeneficioString() + getIvaString() + "€ Total: "+ getTotalString() + "€";
     }
 }
