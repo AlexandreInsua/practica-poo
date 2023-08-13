@@ -1,4 +1,3 @@
-
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -52,15 +51,15 @@ public class CooperativaTest
     @Test
     public void crearPedido_validate_amount_by_order()
     {
-        assertEquals(false, c.crearPedido(distribuidor, aceite, 999, logistica));
-        assertEquals(false, c.crearPedido(minorista, aceite, 101, logistica));
+        assertEquals(false, c.crearPedido(1l, distribuidor, aceite, 999, logistica));
+        assertEquals(false, c.crearPedido(1l, minorista, aceite, 101, logistica));
     }
 
     @Test
     public void crearPedido_validateAvailableAmount_test()
     {
         aceite.setDisponible(0);
-        assertEquals(false, c.crearPedido(distribuidor, aceite, 1000, logistica));
+        assertEquals(false, c.crearPedido(1l, distribuidor, aceite, 1000, logistica));
     }
 }
 

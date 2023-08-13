@@ -1,7 +1,6 @@
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -40,6 +39,8 @@ public class Pedido
     private float total;
     // variable auxiliar para formatear precios
     private DecimalFormat priceFormatter;
+    // Determina el número de dias de aplazamiento para revisar los precios antes de la entreta
+    private final int DIAS_REVISION_PRECIOS = 10;
 
     /**
      * Constructor para objetos de la clase Pedido.
@@ -48,14 +49,13 @@ public class Pedido
      * @param producto El producto solicitado en el pedido.
      * @param cantidad La cantidad del producto solicitado en kilogramos.
      */
-    public Pedido(Cliente cliente, Producto producto, int cantidad)
+    public Pedido(Long id, Cliente cliente, Producto producto, int cantidad)
     {
+        this.id = id;
         this.cliente = cliente;
         this.producto = producto;
         this.cantidad = cantidad;
         creacion = LocalDate.now();
-        entrega = LocalDate.now().plusDays(10);
-        id = LocalDateTime.now().atZone(ZoneId.of("UTC")).toInstant().toEpochMilli();
         estado = PedidoEstado.PENDIENTE; 
         coste = 0;
         logistica = 0;
@@ -63,6 +63,13 @@ public class Pedido
         iva = 0;
         total = 0;
         priceFormatter = new DecimalFormat("#.##");
+
+        entrega = LocalDate.now().plusDays(10);
+    }
+
+    public Pedido(Long id, Cliente cliente, Producto producto, int cantidad, String fechaEntrega){
+        this(id, cliente, producto, cantidad);
+        this.entrega = LocalDate.parse(fechaEntrega, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     /**
@@ -176,8 +183,8 @@ public class Pedido
     public float getLogistica(){
         return logistica;
     }
-    
-      /**
+
+    /**
      * Obtiene una representación en forma de cadena de caracteres del coste de la logística del pedido en €.
      * @return El coste de la logística del pedido en €.
      */
@@ -200,7 +207,7 @@ public class Pedido
     public float getBeneficio(){
         return beneficio;
     }
-    
+
     /**
      * Obtiene una representación en forma de cadena de caracteres del margen beneficio de la cooperativa en €.
      * @return El margen beneficio de la cooperativa en €.
@@ -252,8 +259,8 @@ public class Pedido
     public float getTotal(){
         return total;
     }
-    
-      /**
+
+    /**
      * Obtiene una representación en forma de cadena de caracteres del coste total del pedido en €.
      * @return el coste total del pedido en €.
      */
@@ -261,14 +268,24 @@ public class Pedido
         return priceFormatter.format(total);
     }
 
+    /**
+     * Comprueba si la entrega del pedido se ha pospuesto más allá de un período de revisión de precios.
+     *
+     * @param creacion Fecha de creación del pedido.
+     * @param entrega Fecha de entrega planificada pedido.
+     * @return <code>true</code> si la entrega se ha pospuesto más allá del período de revisión de precios,
+     *         <code>false</code> en caso contrario.
+     */
+    public boolean esPospuesto(LocalDate creacion, LocalDate entrega){
+        return Period.between(creacion, entrega).getDays() > DIAS_REVISION_PRECIOS;
+    }
 
     /**
      *  Devuelve una representación en forma de cadena de caracteres del objeto Pedido.
      *  @return la representación en forma de cadena de caracteres del objeto Pedido.
      */
     public String toString(){
-        return "Nº PEDIDO: "+ getId() +" Fecha: "+getCreacionString() +" Entrega: "+ getEntregaString() 
-        +" Estado: "+ getEstado() 
+        return "Nº: "+ getId() +" Fecha: "+getCreacionString() +" Entrega: "+ getEntregaString() + " Estado: " + getEstado() 
         +"\n\tCliente: "+ getCliente().getNombre() +"(" + getCliente().getClass().getName() + ") Producto: "+ getProducto().getNombre() 
         +"("+ getProducto().getPrecio() + " €/kg)  Cantidad: "+ getCantidad()+" kg" 
         +"\n\tBruto: "+ getCosteString() +"€ Logística: "+ getLogisticaString() + "€ Beneficio: "+ getBeneficioString() + getIvaString() + "€ Total: "+ getTotalString() + "€";

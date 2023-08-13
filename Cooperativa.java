@@ -116,9 +116,9 @@ public class Cooperativa
         listarClientes();
         listarLogísticas();
         
-        crearPedido(reginaC, trigo, 50, sutrans);
-        crearPedido(gadial, algodon, 1000, segura);
-        crearPedido(disnosa, aceite, 2000, sutrans);
+        crearPedido(1l, reginaC, trigo, 50, sutrans);
+        crearPedido(2l, gadial, algodon, 1000, segura);
+        crearPedido(3l,disnosa, aceite, 2000, sutrans);
         
         listarPedidos();
         
@@ -270,10 +270,10 @@ public class Cooperativa
     }
 
     // PEDIDOS
-    public boolean crearPedido( Cliente cliente, Producto producto, int cantidad, Logistica logistica){
+    public boolean crearPedido( long id, Cliente cliente, Producto producto, int cantidad, Logistica logistica){
         try {
             if(validateOrder(cliente, producto, cantidad)){
-                Pedido pedido = new Pedido(cliente, producto, cantidad);
+                Pedido pedido = new Pedido(id, cliente, producto, cantidad);
                 // ENCAPSULAR actualizar costes
                 pedido.setCoste(pedido.getCantidad() * pedido.getProducto().getPrecio());
                 pedido.setBeneficio(pedido.getCoste() * getProfitMarginConst(pedido) );
@@ -281,9 +281,8 @@ public class Cooperativa
                 pedido.setIva((pedido.getCoste() + pedido.getBeneficio() + pedido.getLogistica() ) * getVATConst(pedido));
                 pedido.setTotal(pedido.getCoste() + pedido.getBeneficio() + pedido.getLogistica() + pedido.getIva());
 
-                // TODO actualizar cantidades disponibles
+                // ENCAPSULAR actualizar cantidades disponibles
                 ArrayList<NoFederado> nf = pedido.getProducto().getProdutores();
-                // non funciona
                 nf.forEach(productor -> {
                         ProductoProductor productoProductor = productor.buscarProducto(pedido.getProducto().getNombre());
                         float ratio = productoProductor.getDisponible() / pedido.getProducto().getDisponible();
