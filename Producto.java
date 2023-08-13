@@ -1,11 +1,15 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 /**
- * Clase abtracta Producto. Representa genérica de un producto disponible
- * en la cooperativa.
+ * La clase abstracta Producto representa un producto disponible en la cooperativa.
+ * 
+ * Esta clase proporciona información sobre el nombre, rendimiento, precio de referencia,
+ * productores, cotizaciones, producción anual y disponibilidad de un producto.
+ * Además, incluye métodos para acceder y modificar esta información.
  * 
  * @author Alexandre Insua Moreira.
- * @version 
+ * @version 1.0
  */
 public abstract class Producto
 {
@@ -17,6 +21,8 @@ public abstract class Producto
     private float precio; 
     // Productores que cultivan el producto
     private ArrayList<NoFederado> productores;
+    // Relación de diferentes cotizaciones del producto
+    private ArrayList<Cotizacion> cotizaciones;
     // Cantidad total producida anualmente
     private float produccion;
     // Cantidad de producto disponible
@@ -24,6 +30,7 @@ public abstract class Producto
 
     /**
      * Constructor de objectos de la clase Productor.
+     * 
      * @param nombre nombre del producto.
      * @param rendimiento rendimiento (en tm.) del produto por hectáreaf.
      * @param precio precio (en Euros) de referencia del producto.
@@ -35,12 +42,15 @@ public abstract class Producto
         this.precio = precio;
 
         productores = new ArrayList();
+        cotizaciones = new ArrayList();
+        agregraCotizacion(precio);
         produccion = 0;
         disponible = 0;
     }
 
     /** 
      * Obtiene el nombre del producto.
+     * 
      * @return El nombre del producto.
      */
     public String getNombre(){
@@ -49,6 +59,7 @@ public abstract class Producto
 
     /**
      * Establece el rendimiento del producto.
+     * 
      * @param rendimiento El nuevo rendimiento del producto (en toneladas métricas por hectárea).
      */
     public void setRendimiento(float rendimiento){
@@ -57,6 +68,7 @@ public abstract class Producto
 
     /**
      * Obtiene el rendimiento del producto.
+     * 
      * @return El rendimiento del producto (en toneladas métricas por hectárea).
      */
     public float getRendimiento(){
@@ -65,6 +77,7 @@ public abstract class Producto
 
     /**
      * Establece el precio de referencia del producto.
+     * 
      * @param precio El nuevo precio de referencia del producto (en Euros).
      */
     public void setPrecio(float precio ){
@@ -73,6 +86,7 @@ public abstract class Producto
 
     /**
      * Obtiene el precio de referencia del producto.
+     * 
      * @return El precio de referencia del producto (en Euros).
      */
     public float getPrecio(){
@@ -81,14 +95,16 @@ public abstract class Producto
 
     /**
      * Obtiene la lista de productores que cultivan el producto.
+     * 
      * @return La lista de productores que cultivan el producto
      */
     public ArrayList<NoFederado> getProdutores(){
         return productores;
     }
-    
+
     /**
      * Agrega un productor a la lista de productores que cultivan este producto.
+     * 
      * @param productor El productor a agregar.
      */
     public void addProductor(NoFederado productor){
@@ -97,6 +113,7 @@ public abstract class Producto
 
     /**
      * Establece la cantidad total producida anualmente del producto.
+     * 
      * @param produccion La nueva cantidad total producida anualmente del producto.
      */
     public void setProduccion(float produccion ){
@@ -105,6 +122,7 @@ public abstract class Producto
 
     /**
      * Obtiene la cantidad total producida anualmente del producto.
+     * 
      * @return La cantidad total producida anualmente del producto.
      */
     public float getProduccion(){
@@ -113,6 +131,7 @@ public abstract class Producto
 
     /**
      * Establece la cantidad disponible del producto en inventario.
+     * 
      * @param disponible La nueva cantidad disponible del producto.
      */
     public void setDisponible(float disponible){
@@ -121,9 +140,29 @@ public abstract class Producto
 
     /**
      * Obtiene la cantidad disponible del producto en inventario.
+     * 
      * @return La cantidad disponible del producto.
      */
     public float getDisponible(){
         return disponible;
+    }
+
+    /**
+     * Agrega una cotización a la lista de cotizaciones del producto.
+     * 
+     * @param precio El precio de la cotización a agregar.
+     */
+    public void agregraCotizacion(float precio){
+        cotizaciones.add(new Cotizacion(LocalDate.now(), precio));
+    }
+
+    /**
+     * Lista las cotizaciones del producto en la consola.
+     */
+    public void listarCotizaciones(){
+        System.out.println("Evolución de los precios de " + getNombre());
+        for(Cotizacion cotizacion: cotizaciones){
+            System.out.println(cotizacion.toString());
+        }
     }
 }

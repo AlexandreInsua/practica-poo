@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Cotizacion
+comment0.text=\r\n\ La\ clase\ Cotizacion\ representa\ una\ cotizaci\u00F3n\ de\ precio\ con\ una\ fecha\ asociada.\r\n\ \r\n\ Esta\ clase\ permite\ almacenar\ informaci\u00F3n\ sobre\ el\ precio\ y\ la\ fecha\ de\ una\ cotizaci\u00F3n.\r\n\ Adem\u00E1s,\ proporciona\ un\ m\u00E9todo\ para\ obtener\ una\ representaci\u00F3n\ en\ cadena\ de\ la\ cotizaci\u00F3n.\r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\ 1.0\r\n
+comment1.params=fecha\ precio
+comment1.target=Cotizacion(java.time.LocalDate,\ float)
+comment1.text=\r\n\ Crea\ una\ nueva\ instancia\ de\ la\ clase\ Cotizacion\ con\ la\ fecha\ y\ el\ precio\ especificados.\r\n\ \r\n\ @param\ fecha\ La\ fecha\ de\ la\ cotizaci\u00F3n.\r\n\ @param\ precio\ El\ precio\ asignado\ en\ la\ cotizaci\u00F3n.\r\n
+comment2.params=
+comment2.target=java.lang.String\ toString()
+comment2.text=\r\n\ Devuelve\ una\ representaci\u00F3n\ en\ cadena\ de\ la\ cotizaci\u00F3n.\r\n\ \r\n\ @return\ Una\ cadena\ que\ contiene\ la\ fecha\ en\ el\ formato\ "dd/MM/yyyy"\ y\ el\ precio\ en\ euros\ por\ kilogramo.\r\n
+numComments=3
