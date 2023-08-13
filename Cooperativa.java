@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +73,7 @@ public class Cooperativa
         ProductoProductor pp5 = new ProductoProductor(trigo,1.3f);
         ProductoProductor pp6 = new ProductoProductor(algodon,0.2f);
         ProductoProductor pp7 = new ProductoProductor(aceite, 5f);
+        ProductoProductor pp8 = new ProductoProductor(naranjas, 15f);
 
         NoFederado juanP = new PeqProductor("Juan P.");     
         juanP.asignarProducto(pp1);
@@ -83,10 +86,14 @@ public class Cooperativa
 
         NoFederado celsoP = new GranProductor("Celso P.");
         celsoP.asignarProducto(pp7);
+        
+        NoFederado alcantara = new GranProductor("Alcántara S.A.");
+        alcantara.asignarProducto(pp8);
 
         agregarProductor(juanP);
         agregarProductor(soniaR);
         agregarProductor(celsoP);
+        agregarProductor(alcantara);
 
         Federado algodonFederado = new Federado("Algodón");
         federados.add(algodonFederado);
@@ -109,19 +116,20 @@ public class Cooperativa
         logisticas.add(sutrans);
         logisticas.add(segura);
 
-        
         listarProductos();
         listarProductores();
         listarFederados();
         listarClientes();
         listarLogísticas();
-        
-        crearPedido(1l, reginaC, trigo, 50, sutrans);
-        crearPedido(2l, gadial, algodon, 1000, segura);
-        crearPedido(3l,disnosa, aceite, 2000, sutrans);
-        
+
+        // crearPedido(1l, reginaC, trigo, 50, sutrans);
+        // crearPedido(2l, gadial, algodon, 1000, segura);
+        // crearPedido(3l,disnosa, aceite, 2000, sutrans);
+        crearPedido(4l, millanD, trigo, 10, "01/09/2023", sutrans);
+        //crearPedido(5l, gadial, naranjas, 3000, "15/09/2023", sutrans);
+
         listarPedidos();
-        
+
         listarProductos();
         listarProductores();
         listarFederados();
@@ -162,7 +170,7 @@ public class Cooperativa
     private void updateAvailableProduct(NoFederado productor){
         List<ProductoProductor> productos = productor.getProductos();
         for (ProductoProductor producto: productos){
-            Producto p = searchProduct(producto.getProducto().getNombre());
+            Producto p = buscarProducto(producto.getProducto().getNombre());
             p.addProductor(productor);
             p.setProduccion(p.getProduccion() + producto.getProduccion());
             p.setDisponible(p.getDisponible() + producto.getDisponible());
@@ -170,9 +178,9 @@ public class Cooperativa
 
     }
 
-    private Producto searchProduct(String productName){
+    private Producto buscarProducto(String nombreProducto){
         for (Producto producto : productos) {
-            if (producto.getNombre().equals(productName)) {
+            if (producto.getNombre().equals(nombreProducto)) {
                 return producto;
             }
         }
@@ -187,6 +195,23 @@ public class Cooperativa
         for (Producto producto: productos){
             System.out.println(producto.toString());    
         }
+    }
+
+    /**
+     * Muestra en la consola la lista de cotizacines de todos los productos activos en la cooperativa.
+     */
+    public void listarCotizaciones(){
+        for (Producto producto: productos){
+            producto.listarCotizaciones();
+        }
+    }
+
+    /**
+     * Muestra en la consola la lista de cotizacioens de un producto;
+     */
+    public void ListarCotizaciones(String nombreProducto){
+        Producto producto = buscarProducto(nombreProducto);
+        producto.listarCotizaciones();
     }
 
     // PRODUCTORES NO FEDERADOS
@@ -270,29 +295,15 @@ public class Cooperativa
     }
 
     // PEDIDOS
-    public boolean crearPedido( long id, Cliente cliente, Producto producto, int cantidad, Logistica logistica){
+    public boolean crearPedido(long id, Cliente cliente, Producto producto, int cantidad, Logistica logistica){
         try {
             if(validateOrder(cliente, producto, cantidad)){
                 Pedido pedido = new Pedido(id, cliente, producto, cantidad);
-                // ENCAPSULAR actualizar costes
-                pedido.setCoste(pedido.getCantidad() * pedido.getProducto().getPrecio());
-                pedido.setBeneficio(pedido.getCoste() * getProfitMarginConst(pedido) );
-                pedido.setLogistica(logistica.calcularPrecioLogisticaPedido(pedido));
-                pedido.setIva((pedido.getCoste() + pedido.getBeneficio() + pedido.getLogistica() ) * getVATConst(pedido));
-                pedido.setTotal(pedido.getCoste() + pedido.getBeneficio() + pedido.getLogistica() + pedido.getIva());
 
-                // ENCAPSULAR actualizar cantidades disponibles
-                ArrayList<NoFederado> nf = pedido.getProducto().getProdutores();
-                nf.forEach(productor -> {
-                        ProductoProductor productoProductor = productor.buscarProducto(pedido.getProducto().getNombre());
-                        float ratio = productoProductor.getDisponible() / pedido.getProducto().getDisponible();
-                        float partida = pedido.getCantidad() * ratio;
-                        float nuevoDisponible = productoProductor.getDisponible() - partida;
-                        productoProductor.setDisponible(nuevoDisponible);
-                    });
-                producto.setDisponible(producto.getDisponible() - cantidad);
-
+                actualizarCostesPedido(pedido, logistica);
+                actualizarCantidadesDisponibles(pedido);
                 pedidos.add(pedido);
+
                 return true;
             }
         } catch (Exception e) {
@@ -301,8 +312,22 @@ public class Cooperativa
         return false; 
     }
 
-    public boolean servirPedido(Pedido pedido){
-        // TODO 
+    public boolean crearPedido(long id, Cliente cliente, Producto producto, int cantidad, String fechaEntrega, Logistica logistica){
+        try {
+            if (validarFechaEntrega(fechaEntrega)){
+              return crearPedido(id, cliente, producto, cantidad, logistica);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return false; 
+    }
+
+    public boolean servirPedido(long pedidoId){
+        // buscar pedido
+        // se pospost actualizar custes
+        // asignar ventas
+
         return false;
     }
 
@@ -313,6 +338,26 @@ public class Cooperativa
         }
     }  
 
+    private void actualizarCostesPedido(Pedido pedido, Logistica logistica){
+        pedido.setCoste(pedido.getCantidad() * pedido.getProducto().getPrecio());
+        pedido.setBeneficio(pedido.getCoste() * getProfitMarginConst(pedido) );
+        pedido.setLogistica(logistica.calcularPrecioLogisticaPedido(pedido));
+        pedido.setIva((pedido.getCoste() + pedido.getBeneficio() + pedido.getLogistica() ) * getVATConst(pedido));
+        pedido.setTotal(pedido.getCoste() + pedido.getBeneficio() + pedido.getLogistica() + pedido.getIva());
+    }
+
+    private void actualizarCantidadesDisponibles(Pedido pedido){
+        ArrayList<NoFederado> nf = pedido.getProducto().getProdutores();
+        nf.forEach(productor -> {
+                ProductoProductor productoProductor = productor.buscarProducto(pedido.getProducto().getNombre());
+                float ratio = productoProductor.getDisponible() / pedido.getProducto().getDisponible();
+                float partida = pedido.getCantidad() * ratio;
+                float nuevoDisponible = productoProductor.getDisponible() - partida;
+                productoProductor.setDisponible(nuevoDisponible);
+            });
+        pedido.getProducto().setDisponible(pedido.getProducto().getDisponible() - pedido.getCantidad());
+
+    }
     // Valida el pedido
     private boolean validateOrder(Cliente cliente, Producto producto, int cantidad){
         if (validateAmountByOrder(cliente, cantidad) && validateAvailableAmount(producto, cantidad)){
@@ -346,7 +391,7 @@ public class Cooperativa
         return MARGEN_MINORISTA;
     }
 
-    // obiene la constante para calcular la cantidad de iva
+    // obtiene la constante para calcular la cantidad de iva
     private float getVATConst(Pedido pedido){
         if (pedido.getCliente() instanceof Minorista){
             return IVA;
@@ -354,5 +399,13 @@ public class Cooperativa
         return 0;
     }
 
+    private boolean validarFechaEntrega(String fechaEntrega){
+        LocalDate entrega = LocalDate.parse(fechaEntrega, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        if (entrega.isEqual(LocalDate.now()) || entrega.isAfter(LocalDate.now())){
+            return true;
+        }
+        throw new IllegalArgumentException("La fecha de entrega del pedido no puede ser anterior a la fecha de creacion");
+        
+    }
 }
 

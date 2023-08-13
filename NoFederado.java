@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,6 +10,9 @@ import java.util.List;
  */
 public abstract class NoFederado extends Productor
 {
+    // Relación de ventas de un Productor no federado;
+    ArrayList<Venta> ventas;
+
     /**
      * Constructor de la clase NoFederado.
      * 
@@ -17,6 +21,25 @@ public abstract class NoFederado extends Productor
     public NoFederado(String nombre)
     {
         super(nombre);
+        ventas = new ArrayList();
+    }
+
+    /**
+     * Calcula el beneficio total sumando los beneficios de todas las ventas del Producto.
+     *
+     * @return El beneficio total de todas las ventas del Productor.
+     */
+    public float getBeneficioTotal(){
+        return ventas.stream().map(Venta::getBeneficio).reduce(0f, (subtotal, venta)-> subtotal + venta);
+    }
+
+    /**
+     * Muestra los detalles de todas las ventas en la lista en la consola.
+     */
+    public void listarVentas(){
+        for(Venta venta: ventas){
+            System.out.println(venta.toString());
+        }
     }
 
     /**
@@ -33,7 +56,7 @@ public abstract class NoFederado extends Productor
      * @return Una lista de objetos ProductoProductor que representa los productos asignados al productor no federado.
      */
     public abstract List<ProductoProductor> getProductos();
-    
+
     /**
      * Método abstracto para obtener un producto
      * 
