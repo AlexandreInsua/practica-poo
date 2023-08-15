@@ -147,9 +147,12 @@ public class Cooperativa
         listarProductos();
         listarProductores();
         listarFederados();
-        
-        
+
         listarVentasTotales();
+        // listarImportesProductores();
+        listarImportesLogisticas();
+        listarBeneficiosCooperativa();
+        listarEvolucionPreciosReferencia();
     }
 
     // PRODUCTOS
@@ -427,8 +430,7 @@ public class Cooperativa
             float total = pedidos.stream()
                 .filter( pedido -> pedido.getProducto() == producto)
                 .map(Pedido::getTotal)
-                .reduce(0f,(subtotal, parcial)-> subtotal + parcial);
-
+                .reduce(0f,(subtotal, parcial) -> subtotal + parcial);
             if(total > 0){
                 totalProdutos += total;
                 System.out.println(" Subtotal de " + producto.getNombre() +": " + priceFormatter.format(total) +"€");
@@ -442,7 +444,34 @@ public class Cooperativa
      * Se calcula a partir del monto da las ventas de cada produtor.
      */
     public void listarImportesProductores(){
-        // para cada produtor obteño un arrays dos produtos activos e para cada produto filtro as ventas e resumo o total
+        System.out.println("\nIMPORTES POR PRODUCTORES: ");
+        // TODO listar 
+        // for(NoFederado productor: productores){
+            // List<ProductoProductor> productosProductor = productor.getProductos();
+            // ArrayList<Venta> ventas = productor.getVentas();
+            // System.out.println("Importes obtenidos por " + productor.getNombre());
+            // float totalProdutos = 0; 
+            // for(ProductoProductor productoProductor: productosProductor){
+                // float total = 0;
+                // for (Venta venta: ventas){
+                    // Pedido pedido = venta.getPedido();
+                    // if(pedido != null && pedido.getProducto() == productoProductor.getProducto())
+                    // {
+                        // total += venta.getBeneficio();
+                    // }
+
+                // }
+                // // ventas.stream()
+                // // .filter( venta ->  productoProductor.getProducto() == venta.getPedido().getProducto())
+                // // .map(Venta::getBeneficio)
+                // // .reduce(0f, (subtotal, parcial) -> subtotal + parcial);
+                // if(total > 0){
+                    // totalProdutos += total;
+                    // System.out.println(" Subtotal de " + productoProductor.getProducto().getNombre() +": " + priceFormatter.format(total) +"€");
+                // }
+            // }
+            // System.out.println(" Total de ventas: " + priceFormatter.format(totalProdutos) + "€");
+        // }
     }
 
     /**
@@ -450,23 +479,49 @@ public class Cooperativa
      * Se calcula a partir de los costes de logística de los pedidos.
      */
     public void listarImportesLogisticas(){
-        // para cada loxistica filtros os pedidos mapeos os custes e resumo o total
-
+        System.out.println("\nIMPORTES POR EMPRESAS DE LOGÍSTICA: ");
+        float totalLogisticas = 0;
+        for(Logistica logistica: logisticas){
+            float total = pedidos.stream()
+                .filter (pedido -> pedido.getLogistica() == logistica)
+                .map(Pedido::getCosteLogistica)
+                .reduce(0f, (subtotal, parcial) -> subtotal + parcial);
+            if(total > 0){
+                totalLogisticas += total;
+                System.out.println(" Subtotal de " + logistica.getNombre() +": " + priceFormatter.format(total) +"€");
+            }
+        }
+        System.out.println(" Total de logisticas: " + priceFormatter.format(totalLogisticas) + "€");
     }
 
     /**
      * Obtiene los beneficios de la cooperativa.
      * Se calcula a partir del beneficio de cada pedido.
      */
-    public void beneficiosCooperativa(){
-        // para cada produto, filtros os pedidos mapeo a beneficios e resulto o total, acumulo un total 
+    public void listarBeneficiosCooperativa(){
+        System.out.println("\nBENEFICIOS DE LA COOPERATIVA");
+        float totalBeneficios = 0;
+        for(Producto producto: productos){
+            float total = pedidos.stream()
+                .filter (pedido -> pedido.getProducto() == producto)
+                .map(Pedido::getBeneficio)
+                .reduce(0f, (subtotal, parcial) -> subtotal + parcial);
+            if(total > 0){
+                totalBeneficios += total;
+                System.out.println(" Subtotal de " + producto.getNombre() +": " + priceFormatter.format(total) +"€");
+            } 
+        }
+        System.out.println(" Total de beneficios: " + priceFormatter.format(totalBeneficios) + "€");
     }
 
     /**
      *  Imprime la evolución de precios de referencia de cada producto.
      */
     public void listarEvolucionPreciosReferencia(){
-        // para cada produto, pinto a evolución de prezos    
+        System.out.println("\nEVOLUCIÓN DE PRECIOS");
+        for(Producto producto: productos){
+            producto.listarCotizaciones();
+        }
     }
 }
 

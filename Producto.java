@@ -82,6 +82,7 @@ public abstract class Producto
      */
     public void setPrecio(float precio ){
         this.precio = precio;
+        agregraCotizacion(precio);
     }
 
     /**
@@ -162,7 +163,7 @@ public abstract class Producto
     public void listarCotizaciones(){
         System.out.println("Evolución de los precios de " + getNombre());
         for(Cotizacion cotizacion: cotizaciones){
-            System.out.println(cotizacion.toString());
+            System.out.println(" " + cotizacion.toString());
         }
     }
 }

@@ -28,6 +28,10 @@ public abstract class NoFederado extends Productor
         priceFormatter = new DecimalFormat("#.##");        
     }
 
+    public ArrayList<Venta> getVentas(){
+        return ventas;
+    }
+    
     /**
      * Agrega una venta a la lista de ventas.
      * 
