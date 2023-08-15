@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class Cooperativa
     private final int LIMITE_PRODUCCION = 5;
     private final int PEDIDO_MIN_DISTRIBUIDOR = 1000;
     private final int PEDIDO_MAX_MINORISTA = 100;
+    DecimalFormat priceFormatter;
 
     ArrayList<Producto> productos;
     ArrayList<NoFederado> productores;
@@ -33,6 +35,7 @@ public class Cooperativa
         logisticas = new ArrayList<Logistica>();
         clientes = new ArrayList<Cliente>();
         pedidos = new ArrayList<Pedido>();
+        priceFormatter = new DecimalFormat("#.##");
 
         run();
     }
@@ -144,6 +147,9 @@ public class Cooperativa
         listarProductos();
         listarProductores();
         listarFederados();
+        
+        
+        listarVentasTotales();
     }
 
     // PRODUCTOS
@@ -407,17 +413,30 @@ public class Cooperativa
         }
         throw new IllegalArgumentException("La fecha de entrega del pedido no puede ser anterior a la fecha de creacion");
     }
-    
+
     // INFORMES ESTADÍSTICOS
-    
+
     /** 
      *  Imprime las ventas totales para cada produto de la cooperativa.
      *  Se calcula a partir del total de los pedidos por producto.
      */
     public void listarVentasTotales(){
-    // para cada produto filtro os pedidos, mapeo o total e resumo nunha cantidades
+        System.out.println("\nVENTAS TOTALES: ");
+        float totalProdutos = 0; 
+        for (Producto producto: productos){
+            float total = pedidos.stream()
+                .filter( pedido -> pedido.getProducto() == producto)
+                .map(Pedido::getTotal)
+                .reduce(0f,(subtotal, parcial)-> subtotal + parcial);
+
+            if(total > 0){
+                totalProdutos += total;
+                System.out.println(" Subtotal de " + producto.getNombre() +": " + priceFormatter.format(total) +"€");
+            }
+        }
+        System.out.println(" Total de ventas: " + priceFormatter.format(totalProdutos) + "€");
     }
-    
+
     /**
      * Imprime los importes de cada productor y producto.
      * Se calcula a partir del monto da las ventas de cada produtor.
@@ -425,16 +444,16 @@ public class Cooperativa
     public void listarImportesProductores(){
         // para cada produtor obteño un arrays dos produtos activos e para cada produto filtro as ventas e resumo o total
     }
-    
+
     /**
      * Imprime los importes de cada empresa de logística.
      * Se calcula a partir de los costes de logística de los pedidos.
      */
     public void listarImportesLogisticas(){
         // para cada loxistica filtros os pedidos mapeos os custes e resumo o total
-        
+
     }
-    
+
     /**
      * Obtiene los beneficios de la cooperativa.
      * Se calcula a partir del beneficio de cada pedido.
@@ -442,7 +461,7 @@ public class Cooperativa
     public void beneficiosCooperativa(){
         // para cada produto, filtros os pedidos mapeo a beneficios e resulto o total, acumulo un total 
     }
-    
+
     /**
      *  Imprime la evolución de precios de referencia de cada producto.
      */
