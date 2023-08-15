@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,8 @@ public abstract class NoFederado extends Productor
 {
     // Relación de ventas de un Productor no federado;
     ArrayList<Venta> ventas;
+    // variable auxiliar para formatear precio
+    private DecimalFormat priceFormatter;
 
     /**
      * Constructor de la clase NoFederado.
@@ -22,6 +25,16 @@ public abstract class NoFederado extends Productor
     {
         super(nombre);
         ventas = new ArrayList();
+        priceFormatter = new DecimalFormat("#.##");        
+    }
+
+    /**
+     * Agrega una venta a la lista de ventas.
+     * 
+     * @param venta La instancia de la clase Venta que se va a agregar a la lista.
+     */
+    public void agregarVenta(Venta venta){
+        ventas.add(venta);    
     }
 
     /**
@@ -37,8 +50,14 @@ public abstract class NoFederado extends Productor
      * Muestra los detalles de todas las ventas en la lista en la consola.
      */
     public void listarVentas(){
-        for(Venta venta: ventas){
-            System.out.println(venta.toString());
+        if (ventas.size() > 0){
+            System.out.println("Ventas de " + getNombre() + ":");
+            float total = 0;
+            for(Venta venta: ventas){
+                System.out.println(" " + venta.toString());
+                total += venta.getBeneficio();
+            }
+            System.out.println("\tTotal : " + priceFormatter.format(total) + "€");    
         }
     }
 

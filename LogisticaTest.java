@@ -55,7 +55,7 @@ public class LogisticaTest
     {
         Distribuidor cliente = new Distribuidor("Gadisa", 180);
         Perecedero producto = new Perecedero("Nectarina", 2.5f, 0.75f);
-        Pedido pedido = new Pedido(1l, cliente, producto, 180);
+        Pedido pedido = new Pedido(1l, cliente, producto, 180, logistic);
         assertEquals(582.0, logistic.calcularPrecioLogisticaPedido(pedido), 0.1);
     }
 
@@ -64,7 +64,7 @@ public class LogisticaTest
     {
         Distribuidor cliente = new Distribuidor("Gadisa", 180);
         NoPerecedero producto = new NoPerecedero("Aceite", 2.5f, 0.5f);
-        Pedido pedido = new Pedido(1l, cliente, producto, 2000);
+        Pedido pedido = new Pedido(1l, cliente, producto, 2000, logistic);
         assertEquals(2115, logistic.calcularPrecioLogisticaPedido(pedido), 0.1);
     }
 }

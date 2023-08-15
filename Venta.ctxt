@@ -2,7 +2,7 @@
 comment0.target=Venta
 comment0.text=\r\n\ La\ clase\ Venta\ representa\ una\ transacci\u00F3n\ de\ venta\ de\ mercanc\u00EDa\ relacionada\ con\ un\ pedido.\r\n\ Contiene\ informaci\u00F3n\ sobre\ el\ pedido\ asociado,\ la\ cantidad\ de\ mercanc\u00EDa\ vendida\ y\ el\ precio.\r\n\ Tambi\u00E9n\ proporciona\ m\u00E9todos\ para\ calcular\ el\ beneficio\ de\ la\ venta\ y\ generar\ una\ representaci\u00F3n\ en\ cadena.\r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\ 1.0\r\n
 comment1.params=pedido\ cantidad\ precio
-comment1.target=Venta(Pedido,\ int,\ float)
+comment1.target=Venta(Pedido,\ float,\ float)
 comment1.text=\r\n\ Crea\ una\ nueva\ instancia\ de\ la\ clase\ Venta.\r\n\ \r\n\ @param\ pedido\ El\ pedido\ relacionado\ con\ la\ venta.\r\n\ @param\ cantidad\ La\ cantidad\ de\ mercanc\u00EDa\ vendida\ en\ kilogramos.\r\n\ @param\ precio\ El\ precio\ de\ la\ mercanc\u00EDa\ en\ euros\ al\ momento\ de\ la\ venta.\r\n
 comment2.params=
 comment2.target=float\ getBeneficio()

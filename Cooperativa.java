@@ -14,9 +14,6 @@ public class Cooperativa
     private final int LIMITE_PRODUCCION = 5;
     private final int PEDIDO_MIN_DISTRIBUIDOR = 1000;
     private final int PEDIDO_MAX_MINORISTA = 100;
-    private final float MARGEN_DISTRIBUIDOR = 0.05f;
-    private final float MARGEN_MINORISTA = 0.15f;
-    private final float IVA = 0.10f;
 
     ArrayList<Producto> productos;
     ArrayList<NoFederado> productores;
@@ -80,17 +77,21 @@ public class Cooperativa
         juanP.asignarProducto(pp2);
         juanP.asignarProducto(pp3);
 
+        NoFederado vergara = new GranProductor("Grupo Vergara");
+        vergara.asignarProducto(pp4);
+
         NoFederado soniaR = new PeqProductor("Sonia R.");
         soniaR.asignarProducto(pp5);
         soniaR.asignarProducto(pp6);
 
         NoFederado celsoP = new GranProductor("Celso P.");
         celsoP.asignarProducto(pp7);
-        
+
         NoFederado alcantara = new GranProductor("Alcántara S.A.");
         alcantara.asignarProducto(pp8);
 
         agregarProductor(juanP);
+        agregarProductor(vergara);
         agregarProductor(soniaR);
         agregarProductor(celsoP);
         agregarProductor(alcantara);
@@ -122,13 +123,23 @@ public class Cooperativa
         listarClientes();
         listarLogísticas();
 
-        // crearPedido(1l, reginaC, trigo, 50, sutrans);
-        // crearPedido(2l, gadial, algodon, 1000, segura);
-        // crearPedido(3l,disnosa, aceite, 2000, sutrans);
-        crearPedido(4l, millanD, trigo, 10, "01/09/2023", sutrans);
-        //crearPedido(5l, gadial, naranjas, 3000, "15/09/2023", sutrans);
+        crearPedido(1l, reginaC, trigo, 50, sutrans);
+        crearPedido(2l, gadial, algodon, 1000, segura);
+        crearPedido(3l,disnosa, aceite, 2000, sutrans);
+        crearPedido(4l, millanD, trigo, 10, "01/10/2023", sutrans);
+        crearPedido(5l, gadial, naranjas, 3000, "15/10/2023", sutrans);
 
         listarPedidos();
+
+        servirPedido(1l);
+        servirPedido(2l);
+        servirPedido(3l);
+        trigo.setPrecio(0.55f);
+        servirPedido(4l);
+        servirPedido(5l);
+
+        listarPedidos();
+        listarVentas();
 
         listarProductos();
         listarProductores();
@@ -246,6 +257,13 @@ public class Cooperativa
         }
     }
 
+    public void listarVentas(){
+        System.out.println("\nLISTA DE VENTAS");
+        for (NoFederado productor: productores){
+            productor.listarVentas();
+        }
+    }
+
     // PRODUCTOS FEDERADOS
     public void federarProducto(Productor productor, ProductoProductor producto){
         try {
@@ -298,12 +316,10 @@ public class Cooperativa
     public boolean crearPedido(long id, Cliente cliente, Producto producto, int cantidad, Logistica logistica){
         try {
             if(validateOrder(cliente, producto, cantidad)){
-                Pedido pedido = new Pedido(id, cliente, producto, cantidad);
-
-                actualizarCostesPedido(pedido, logistica);
-                actualizarCantidadesDisponibles(pedido);
+                Pedido pedido = new Pedido(id, cliente, producto, cantidad, logistica);
+                pedido.actualizarCostesPedido();
+                pedido.actualizarCantidadesDisponibles();
                 pedidos.add(pedido);
-
                 return true;
             }
         } catch (Exception e) {
@@ -314,8 +330,12 @@ public class Cooperativa
 
     public boolean crearPedido(long id, Cliente cliente, Producto producto, int cantidad, String fechaEntrega, Logistica logistica){
         try {
-            if (validarFechaEntrega(fechaEntrega)){
-              return crearPedido(id, cliente, producto, cantidad, logistica);
+            if ( validateOrder(cliente, producto, cantidad) && validarFechaEntrega(fechaEntrega)){
+                Pedido pedido = new Pedido(id, cliente, producto, cantidad, logistica, fechaEntrega);
+                pedido.actualizarCostesPedido();
+                pedido.actualizarCantidadesDisponibles();
+                pedidos.add(pedido);
+                return true;
             }
         } catch (Exception e) {
             System.err.println(e);
@@ -324,10 +344,18 @@ public class Cooperativa
     }
 
     public boolean servirPedido(long pedidoId){
-        // buscar pedido
-        // se pospost actualizar custes
-        // asignar ventas
-
+        Pedido pedido = buscarPedido(pedidoId);
+        if (pedido != null){
+            if(pedido.esPospuesto(pedido.getCreacion(), pedido.getEntrega())){
+                System.out.println("todo: actualizar prezos");
+                pedido.actualizarCostesPedido();
+            }
+            pedido.setEstadoEntregado();
+            pedido.asignarVentas();
+            return true;
+        } else {
+            System.err.println("No se encuentra el pedido con número " + pedidoId);   
+        }
         return false;
     }
 
@@ -338,26 +366,15 @@ public class Cooperativa
         }
     }  
 
-    private void actualizarCostesPedido(Pedido pedido, Logistica logistica){
-        pedido.setCoste(pedido.getCantidad() * pedido.getProducto().getPrecio());
-        pedido.setBeneficio(pedido.getCoste() * getProfitMarginConst(pedido) );
-        pedido.setLogistica(logistica.calcularPrecioLogisticaPedido(pedido));
-        pedido.setIva((pedido.getCoste() + pedido.getBeneficio() + pedido.getLogistica() ) * getVATConst(pedido));
-        pedido.setTotal(pedido.getCoste() + pedido.getBeneficio() + pedido.getLogistica() + pedido.getIva());
+    public Pedido buscarPedido(long id){
+        for (Pedido pedido: pedidos){
+            if (pedido.getId() == id){
+                return pedido;
+            }
+        }
+        return null;
     }
 
-    private void actualizarCantidadesDisponibles(Pedido pedido){
-        ArrayList<NoFederado> nf = pedido.getProducto().getProdutores();
-        nf.forEach(productor -> {
-                ProductoProductor productoProductor = productor.buscarProducto(pedido.getProducto().getNombre());
-                float ratio = productoProductor.getDisponible() / pedido.getProducto().getDisponible();
-                float partida = pedido.getCantidad() * ratio;
-                float nuevoDisponible = productoProductor.getDisponible() - partida;
-                productoProductor.setDisponible(nuevoDisponible);
-            });
-        pedido.getProducto().setDisponible(pedido.getProducto().getDisponible() - pedido.getCantidad());
-
-    }
     // Valida el pedido
     private boolean validateOrder(Cliente cliente, Producto producto, int cantidad){
         if (validateAmountByOrder(cliente, cantidad) && validateAvailableAmount(producto, cantidad)){
@@ -383,29 +400,54 @@ public class Cooperativa
         return true;
     }
 
-    // obtiene la constante para calcular el margen de beneficio   
-    private float getProfitMarginConst(Pedido pedido){
-        if (pedido.getCliente() instanceof Distribuidor){
-            return MARGEN_DISTRIBUIDOR;
-        }
-        return MARGEN_MINORISTA;
-    }
-
-    // obtiene la constante para calcular la cantidad de iva
-    private float getVATConst(Pedido pedido){
-        if (pedido.getCliente() instanceof Minorista){
-            return IVA;
-        }
-        return 0;
-    }
-
     private boolean validarFechaEntrega(String fechaEntrega){
         LocalDate entrega = LocalDate.parse(fechaEntrega, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         if (entrega.isEqual(LocalDate.now()) || entrega.isAfter(LocalDate.now())){
             return true;
         }
         throw new IllegalArgumentException("La fecha de entrega del pedido no puede ser anterior a la fecha de creacion");
+    }
+    
+    // INFORMES ESTADÍSTICOS
+    
+    /** 
+     *  Imprime las ventas totales para cada produto de la cooperativa.
+     *  Se calcula a partir del total de los pedidos por producto.
+     */
+    public void listarVentasTotales(){
+    // para cada produto filtro os pedidos, mapeo o total e resumo nunha cantidades
+    }
+    
+    /**
+     * Imprime los importes de cada productor y producto.
+     * Se calcula a partir del monto da las ventas de cada produtor.
+     */
+    public void listarImportesProductores(){
+        // para cada produtor obteño un arrays dos produtos activos e para cada produto filtro as ventas e resumo o total
+    }
+    
+    /**
+     * Imprime los importes de cada empresa de logística.
+     * Se calcula a partir de los costes de logística de los pedidos.
+     */
+    public void listarImportesLogisticas(){
+        // para cada loxistica filtros os pedidos mapeos os custes e resumo o total
         
+    }
+    
+    /**
+     * Obtiene los beneficios de la cooperativa.
+     * Se calcula a partir del beneficio de cada pedido.
+     */
+    public void beneficiosCooperativa(){
+        // para cada produto, filtros os pedidos mapeo a beneficios e resulto o total, acumulo un total 
+    }
+    
+    /**
+     *  Imprime la evolución de precios de referencia de cada producto.
+     */
+    public void listarEvolucionPreciosReferencia(){
+        // para cada produto, pinto a evolución de prezos    
     }
 }
 

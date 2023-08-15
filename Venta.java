@@ -13,7 +13,7 @@ public class Venta
     // Pedido relacionado con la venta
     Pedido pedido;
     // Cantidad de mercancia proporcional al pedido en kg
-    int cantidad;
+    float cantidad;
     // Precio de la mercancia en el momento de servir el pedido en €
     float precio;
     // variable auxiliar para formatear precio
@@ -26,7 +26,7 @@ public class Venta
      * @param cantidad La cantidad de mercancía vendida en kilogramos.
      * @param precio El precio de la mercancía en euros al momento de la venta.
      */
-    public Venta(Pedido pedido, int cantidad, float precio){
+    public Venta(Pedido pedido, float cantidad, float precio){
         this.pedido = pedido;
         this.cantidad = cantidad;
         this.precio = precio;
@@ -50,6 +50,7 @@ public class Venta
      * la fecha de la venta, la cantidad de mercancía, el precio formateado y el beneficio formateado.
      */
     public String toString(){
-        return "Pedido nº:"+ pedido.getId() +". Fecha venta: " + pedido.getEntregaString() + " " + cantidad + "kg " + priceFormatter.format(precio) + "€: " + priceFormatter.format(getBeneficio());
+        return "Pedido nº:"+ pedido.getId() +". Fecha venta: " + pedido.getEntregaString() 
+        + ", " + pedido.getProducto().getNombre()+", " + cantidad + "kg (" + priceFormatter.format(precio) + "€/kg). Total: " + priceFormatter.format(getBeneficio()) + "€";
     }
 }
