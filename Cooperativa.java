@@ -66,6 +66,7 @@ public class Cooperativa
         agregarProducto(ciruelas);
         agregarProducto(trigo);
 
+        
         ProductoProductor pp1 = new ProductoProductor(naranjas,1.5f);
         ProductoProductor pp2 = new ProductoProductor(algodon,0.5f);
         ProductoProductor pp3 = new ProductoProductor(melocotones,1.5f);
@@ -149,7 +150,7 @@ public class Cooperativa
         listarFederados();
 
         listarVentasTotales();
-        // listarImportesProductores();
+        listarImportesProductores();
         listarImportesLogisticas();
         listarBeneficiosCooperativa();
         listarEvolucionPreciosReferencia();
@@ -190,12 +191,13 @@ public class Cooperativa
     private void updateAvailableProduct(NoFederado productor){
         List<ProductoProductor> productos = productor.getProductos();
         for (ProductoProductor producto: productos){
+            if(producto != null){
             Producto p = buscarProducto(producto.getProducto().getNombre());
             p.addProductor(productor);
             p.setProduccion(p.getProduccion() + producto.getProduccion());
-            p.setDisponible(p.getDisponible() + producto.getDisponible());
+            p.setDisponible(p.getDisponible() + producto.getDisponible());    
+            }
         }
-
     }
 
     private Producto buscarProducto(String nombreProducto){
@@ -356,7 +358,6 @@ public class Cooperativa
         Pedido pedido = buscarPedido(pedidoId);
         if (pedido != null){
             if(pedido.esPospuesto(pedido.getCreacion(), pedido.getEntrega())){
-                System.out.println("todo: actualizar prezos");
                 pedido.actualizarCostesPedido();
             }
             pedido.setEstadoEntregado();
@@ -446,32 +447,27 @@ public class Cooperativa
     public void listarImportesProductores(){
         System.out.println("\nIMPORTES POR PRODUCTORES: ");
         // TODO listar 
-        // for(NoFederado productor: productores){
-            // List<ProductoProductor> productosProductor = productor.getProductos();
-            // ArrayList<Venta> ventas = productor.getVentas();
-            // System.out.println("Importes obtenidos por " + productor.getNombre());
-            // float totalProdutos = 0; 
-            // for(ProductoProductor productoProductor: productosProductor){
-                // float total = 0;
-                // for (Venta venta: ventas){
-                    // Pedido pedido = venta.getPedido();
-                    // if(pedido != null && pedido.getProducto() == productoProductor.getProducto())
-                    // {
-                        // total += venta.getBeneficio();
-                    // }
+        for(NoFederado productor: productores){
+            System.out.println(" Importes obtenidos por " + productor.getNombre());
 
-                // }
-                // // ventas.stream()
-                // // .filter( venta ->  productoProductor.getProducto() == venta.getPedido().getProducto())
-                // // .map(Venta::getBeneficio)
-                // // .reduce(0f, (subtotal, parcial) -> subtotal + parcial);
-                // if(total > 0){
-                    // totalProdutos += total;
-                    // System.out.println(" Subtotal de " + productoProductor.getProducto().getNombre() +": " + priceFormatter.format(total) +"€");
-                // }
-            // }
-            // System.out.println(" Total de ventas: " + priceFormatter.format(totalProdutos) + "€");
-        // }
+            List<ProductoProductor> productosProductor = productor.getProductos();
+            ArrayList<Venta> ventas = productor.getVentas();
+            float totalVentas= 0; 
+
+            for(ProductoProductor productoProductor: productosProductor){
+                if (productoProductor != null){
+                    float total = ventas.stream()
+                        .filter( venta ->  productoProductor.getProducto() == venta.getPedido().getProducto())
+                        .map(Venta::getBeneficio)
+                        .reduce(0f, (subtotal, parcial) -> subtotal + parcial);
+                    if(total > 0){
+                        totalVentas += total;
+                        System.out.println("\tSubtotal de " + productoProductor.getProducto().getNombre() +": " + priceFormatter.format(total) +"€");
+                    }
+                }
+            }
+            System.out.println("\tTotal de ventas: " + priceFormatter.format(totalVentas) + "€");
+        }
     }
 
     /**

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.text.DecimalFormat;
 
 /**
  * La clase abstracta Producto representa un producto disponible en la cooperativa.
@@ -27,12 +28,14 @@ public abstract class Producto
     private float produccion;
     // Cantidad de producto disponible
     private float disponible;
+    // variable auxiliar para formatear precios
+    DecimalFormat priceFormatter;
 
     /**
      * Constructor de objectos de la clase Productor.
      * 
      * @param nombre nombre del producto.
-     * @param rendimiento rendimiento (en tm.) del produto por hectáreaf.
+     * @param rendimiento rendimiento (en tm.) del produto por hectárea.
      * @param precio precio (en Euros) de referencia del producto.
      */
     public Producto(String nombre, float rendimiento, float precio)
@@ -46,6 +49,7 @@ public abstract class Producto
         agregraCotizacion(precio);
         produccion = 0;
         disponible = 0;
+        priceFormatter = new DecimalFormat("#.##");
     }
 
     /** 

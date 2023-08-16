@@ -24,6 +24,7 @@ public class Perecedero extends Producto
      * @return Una cadena que representa la información del producto
      */
     public String toString(){
-        return getNombre() + ". Perecedero. Precio de ref.: " + getPrecio() + "€. Producción anual: " + getProduccion()+ "Tm. Disponible: " + getDisponible() + "Tm";
+        return getNombre() + ". Perecedero. Precio de ref.: " + priceFormatter.format(getPrecio()) + "€. Producción anual: " 
+        + priceFormatter.format(getProduccion()) + "kg. Disponible: " + priceFormatter.format(getDisponible()) + "kg";
     }
 }
