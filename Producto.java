@@ -32,11 +32,11 @@ public abstract class Producto
     DecimalFormat priceFormatter;
 
     /**
-     * Constructor de objectos de la clase Productor.
+     * Constructor de objectos de la clase Producto.
      * 
      * @param nombre nombre del producto.
      * @param rendimiento rendimiento (en tm.) del produto por hectárea.
-     * @param precio precio (en Euros) de referencia del producto.
+     * @param precio precio (en euros) de referencia del producto.
      */
     public Producto(String nombre, float rendimiento, float precio)
     {
@@ -57,7 +57,8 @@ public abstract class Producto
      * 
      * @return El nombre del producto.
      */
-    public String getNombre(){
+    public String getNombre()
+    {
         return nombre;
     }
 
@@ -75,7 +76,8 @@ public abstract class Producto
      * 
      * @return El rendimiento del producto (en toneladas métricas por hectárea).
      */
-    public float getRendimiento(){
+    public float getRendimiento()
+    {
         return rendimiento;
     }
 
@@ -84,7 +86,8 @@ public abstract class Producto
      * 
      * @param precio El nuevo precio de referencia del producto (en Euros).
      */
-    public void setPrecio(float precio ){
+    public void setPrecio(float precio )
+    {
         this.precio = precio;
         agregraCotizacion(precio);
     }
@@ -103,7 +106,8 @@ public abstract class Producto
      * 
      * @return La lista de productores que cultivan el producto
      */
-    public ArrayList<NoFederado> getProdutores(){
+    public ArrayList<NoFederado> getProdutores()
+    {
         return productores;
     }
 
@@ -112,7 +116,8 @@ public abstract class Producto
      * 
      * @param productor El productor a agregar.
      */
-    public void addProductor(NoFederado productor){
+    public void addProductor(NoFederado productor)
+    {
         productores.add(productor);
     }
 
@@ -121,7 +126,8 @@ public abstract class Producto
      * 
      * @param produccion La nueva cantidad total producida anualmente del producto.
      */
-    public void setProduccion(float produccion ){
+    public void setProduccion(float produccion )
+    {
         this.produccion = produccion;
     }
 
@@ -130,7 +136,8 @@ public abstract class Producto
      * 
      * @return La cantidad total producida anualmente del producto.
      */
-    public float getProduccion(){
+    public float getProduccion()
+    {
         return produccion;
     }
 
@@ -139,7 +146,8 @@ public abstract class Producto
      * 
      * @param disponible La nueva cantidad disponible del producto.
      */
-    public void setDisponible(float disponible){
+    public void setDisponible(float disponible)
+    {
         this.disponible = disponible;
     }
 
@@ -157,14 +165,16 @@ public abstract class Producto
      * 
      * @param precio El precio de la cotización a agregar.
      */
-    public void agregraCotizacion(float precio){
+    public void agregraCotizacion(float precio)
+    {
         cotizaciones.add(new Cotizacion(LocalDate.now(), precio));
     }
 
     /**
      * Lista las cotizaciones del producto en la consola.
      */
-    public void listarCotizaciones(){
+    public void listarCotizaciones()
+    {
         System.out.println("Evolución de los precios de " + getNombre());
         for(Cotizacion cotizacion: cotizaciones){
             System.out.println(" " + cotizacion.toString());

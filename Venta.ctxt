@@ -6,6 +6,7 @@ comment1.target=Venta(Pedido,\ float,\ float)
 comment1.text=\r\n\ Crea\ una\ nueva\ instancia\ de\ la\ clase\ Venta.\r\n\ \r\n\ @param\ pedido\ El\ pedido\ relacionado\ con\ la\ venta.\r\n\ @param\ cantidad\ La\ cantidad\ de\ mercanc\u00EDa\ vendida\ en\ kilogramos.\r\n\ @param\ precio\ El\ precio\ de\ la\ mercanc\u00EDa\ en\ euros\ al\ momento\ de\ la\ venta.\r\n
 comment2.params=
 comment2.target=Pedido\ getPedido()
+comment2.text=\r\n\ Obtiene\ el\ pedido\ relacionado\ con\ la\ venta.\r\n\ \r\n\ @return\ El\ pedido\ relacionado\ con\ la\ venta.\r\n
 comment3.params=
 comment3.target=float\ getBeneficio()
 comment3.text=\r\n\ Calcula\ y\ devuelve\ el\ beneficio\ de\ la\ venta.\r\n\ El\ beneficio\ se\ calcula\ multiplicando\ la\ cantidad\ de\ mercanc\u00EDa\ vendida\ por\ el\ precio.\r\n\ \r\n\ @return\ El\ beneficio\ de\ la\ venta\ en\ euros.\r\n

@@ -33,10 +33,15 @@ public class Venta
         priceFormatter = new DecimalFormat("#.##");        
     }
 
+    /**
+     * Obtiene el pedido relacionado con la venta.
+     * 
+     * @return El pedido relacionado con la venta.
+     */
     public Pedido getPedido(){
         return pedido;
     }
-    
+
     /**
      * Calcula y devuelve el beneficio de la venta.
      * El beneficio se calcula multiplicando la cantidad de mercancía vendida por el precio.

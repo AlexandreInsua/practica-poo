@@ -37,7 +37,8 @@ public class Cotizacion
      * 
      * @return Una cadena que contiene la fecha en el formato "dd/MM/yyyy" y el precio en euros por kilogramo.
      */
-    public String toString(){
+    public String toString()
+    {
         return  fecha.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +": "+ priceFormatter.format(precio) +"€/kg";
     }
 }

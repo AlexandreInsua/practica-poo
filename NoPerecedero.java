@@ -3,16 +3,17 @@
  * Clase NoPerecedero. Representa un producto no perecedero.
  * 
  * @author Alexandre Insua Moreira.
- * @version
+ * @version 1.0
  */
 public class NoPerecedero extends Producto
 {
 
     /**
      * Constructor para objetos de la clase NoPerecedero.
-     * @param nombre nombre del producto.
-     * @param rendimiento rendimiento (en tm.) del produto por hectáreas.
-     * @param precio precio (en Euros) de referencia del producto.
+     * 
+     * @param nombre El nombre del producto.
+     * @param rendimiento El rendimiento (en tm.) del produto por hectáreas.
+     * @param precio El precio (en Euros) de referencia del producto.
      */
     public NoPerecedero(String nombre, float rendimiento, float precio)
     {
@@ -20,7 +21,8 @@ public class NoPerecedero extends Producto
     }
 
     /**
-     * Devuelve una representación en forma de cadena (String) de la información relevante del producto.
+     * Devuelve una representación en forma de cadena de caracteres de la información relevante del producto.
+     * 
      * @return Una cadena que representa la información del producto
      */
     public String toString(){

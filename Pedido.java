@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * y la cantidad en kilogramos del producto solicitado.
  * 
  * @author Alexandre Insua Moreira
- * @version
+ * @version 1.0
  */
 public class Pedido
 {
@@ -77,6 +77,14 @@ public class Pedido
         entrega = LocalDate.now().plusDays(10);
     }
 
+    /**
+     * Constructor para objetos de la clase Pedido.
+     * 
+     * @param cliente El cliente que realiza el pedido.
+     * @param producto El producto solicitado en el pedido.
+     * @param cantidad La cantidad del producto solicitado en kilogramos.
+     * @param fechaEntrega La fecha de entrega del pedido.
+     */
     public Pedido(Long id, Cliente cliente, Producto producto, int cantidad, Logistica logistica, String fechaEntrega){
         this(id, cliente, producto, cantidad, logistica);
         this.entrega = LocalDate.parse(fechaEntrega, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -84,6 +92,7 @@ public class Pedido
 
     /**
      * Devuelve el identificador único del pedido.
+     * 
      * @return El identificador único del pedido.
      */
     public long getId(){
@@ -92,6 +101,7 @@ public class Pedido
 
     /**
      * Devuelve la fecha de creación del pedido.
+     * 
      * @return La fecha de creación del pedido.
      */
     public LocalDate getCreacion(){
@@ -100,6 +110,7 @@ public class Pedido
 
     /**
      * Devuelve la fecha de creación del pedido en formato de string "dd/MM/yyyy".
+     * 
      * @return La fecha de creación del pedido en formato de string "dd/MM/yyyy".
      */
     public String getCreacionString(){
@@ -108,6 +119,7 @@ public class Pedido
 
     /**
      * Devuelve la fecha de entrega prevista para el pedido.
+     * 
      * @return La fecha de entrega prevista para el pedido.
      */
     public LocalDate getEntrega(){
@@ -116,6 +128,7 @@ public class Pedido
 
     /**
      * Devuelve la fecha de entrega del pedido en formato de string "dd/MM/yyyy".
+     * 
      * @return La fecha de entrega del pedido en formato de string "dd/MM/yyyy".
      */
     public String getEntregaString(){
@@ -124,6 +137,7 @@ public class Pedido
 
     /**
      * Obtiene el cliente que realizó este pedido.
+     * 
      * @return El objeto Cliente que realizó el pedido.
      */
     public Cliente getCliente() {
@@ -132,6 +146,7 @@ public class Pedido
 
     /**
      * Obtiene el producto asociado a este pedido.
+     * 
      * @return El objeto Producto solicitado en este pedido.
      */
     public Producto getProducto() {
@@ -140,6 +155,7 @@ public class Pedido
 
     /**
      * Obtiene la cantidad del producto solicitado en este pedido.
+     * 
      * @return La cantidad del producto solicitado en kilogramos.
      */
     public int getCantidad() {
@@ -151,19 +167,24 @@ public class Pedido
     }
 
     /**
-     * Obtiene el estado del pedido
+     * Obtiene el estado del pedido.
+     * 
      * @return El estado del producto
      */
     public PedidoEstado getEstado(){
         return estado;
     }
 
+    /**
+     * Establece el estado del pedido.
+     */
     public void setEstadoEntregado(){
         estado =  PedidoEstado.ENTREGADO;
     }
 
     /**
      * Establece el coste de la mercancía del pedido en €.
+     * 
      * @param El coste de la mercancía del pedido en €.
      */
     public void setCoste(float coste){
@@ -172,6 +193,7 @@ public class Pedido
 
     /**
      * Obtiene el coste de la mercancía del pedido en €.
+     * 
      * @return El coste de la mercancía del pedido en €.
      */
     public float getCoste(){
@@ -180,6 +202,7 @@ public class Pedido
 
     /**
      * Obtiene una representación en forma de cadena de caracteres del coste de la mercancía del pedido en €.
+     * 
      * @return El coste de la mercancía del pedido en €.
      */
     public String getCosteString(){
@@ -188,6 +211,7 @@ public class Pedido
 
     /**
      * Establece el coste de la logística del pedido en €.
+     * 
      * @param El coste de la logística del pedido en €.
      */
     public void setCosteLogistica(float costeLogistica){
@@ -196,6 +220,7 @@ public class Pedido
 
     /**
      * Obtiene el coste de la logística del pedido en €.
+     * 
      * @return El coste de la logística del pedido en €.
      */
     public float getCosteLogistica(){
@@ -204,6 +229,7 @@ public class Pedido
 
     /**
      * Obtiene una representación en forma de cadena de caracteres del coste de la logística del pedido en €.
+     * 
      * @return El coste de la logística del pedido en €.
      */
     public String getCosteLogisticaString(){
@@ -212,6 +238,7 @@ public class Pedido
 
     /**
      * Establece el margen beneficio de la cooperativa en €.
+     * 
      * @param El margen beneficio de la cooperativa pedido en €.
      */
     public void setBeneficio(float beneficio){
@@ -220,6 +247,7 @@ public class Pedido
 
     /**
      * Obtiene el margen beneficio de la cooperativa en €.
+     * 
      * @return El margen beneficio de la cooperativa en €.
      */
     public float getBeneficio(){
@@ -228,6 +256,7 @@ public class Pedido
 
     /**
      * Obtiene una representación en forma de cadena de caracteres del margen beneficio de la cooperativa en €.
+     * 
      * @return El margen beneficio de la cooperativa en €.
      */
     public String getBeneficioString(){
@@ -236,6 +265,7 @@ public class Pedido
 
     /**
      * Establece la cantidad de iva del pedido en €.
+     * 
      * @param La cantidad de iva pedido en €.
      */
     public void setIva(float iva){
@@ -244,6 +274,7 @@ public class Pedido
 
     /**
      * Obtiene la cantidad de iva  del pedido en €.
+     * 
      * @return La cantidad de iva  del pedido en €.
      */
     public float getIva(){
@@ -253,6 +284,7 @@ public class Pedido
     /**
      * Obtiene una representación en forma de cadena de caracteres del IVA 
      * si el cliente es una instancia de la clase Minorista o una cadena vacía en caso contrario;
+     * 
      * @return una representación en forma de cadena de caracteres del IVA.
      */
     public String getIvaString(){
@@ -264,6 +296,7 @@ public class Pedido
 
     /**
      * Establece el coste total del pedido en €.
+     * 
      * @param El coste total del pedido en €.
      */
     public void setTotal(float total){
@@ -306,7 +339,7 @@ public class Pedido
         setTotal(coste + beneficio + costeLogistica + iva);
     }
 
-      public void actualizarCantidadesDisponibles(){
+    public void actualizarCantidadesDisponibles(){
         ArrayList<NoFederado> nf = producto.getProdutores();
         nf.forEach(productor -> {
                 ProductoProductor productoProductor = productor.buscarProducto(producto.getNombre());
@@ -318,7 +351,6 @@ public class Pedido
         producto.setDisponible(producto.getDisponible() - cantidad);
     }
 
-    
     public void asignarVentas(){
         ArrayList<NoFederado> nf = producto.getProdutores();
         nf.forEach(productor -> {
@@ -328,6 +360,7 @@ public class Pedido
                 productor.agregarVenta(new Venta(this, partida, producto.getPrecio()));
             });
     }
+
     /**
      *  Devuelve una representación en forma de cadena de caracteres del objeto Pedido.
      *  @return la representación en forma de cadena de caracteres del objeto Pedido.
@@ -338,8 +371,7 @@ public class Pedido
         +"("+ getProducto().getPrecio() + " €/kg)  Cantidad: "+ getCantidad()+" kg" 
         +"\n\tBruto: "+ getCosteString() +"€ Logística: "+ getCosteLogisticaString() + "€ Beneficio: "+ getBeneficioString() + getIvaString() + "€ Total: "+ getTotalString() + "€";
     }
-    
-    
+
     // obtiene la constante para calcular el margen de beneficio   
     private float getConstanteMargenBeneficios(){
         if (cliente instanceof Distribuidor){
@@ -347,8 +379,8 @@ public class Pedido
         }
         return MARGEN_MINORISTA;
     }
-    
-        // obtiene la constante para calcular la cantidad de iva
+
+    // obtiene la constante para calcular la cantidad de iva
     private float getConstanteIVA(){
         if (cliente instanceof Minorista){
             return IVA;
