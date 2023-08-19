@@ -5,8 +5,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
- * La clase Pedido representa un pedido realizado por un cliente para un producto específico en una cantidad determinada.
- * Cada instancia de esta clase contiene información sobre el cliente que realiza el pedido, el producto solicitado
+ * La clase Pedido representa un pedido realizado por un cliente 
+ * para un producto específico en una cantidad determinada.
+ * Cada instancia de esta clase contiene información sobre 
+ * el cliente que realiza el pedido, el producto solicitado
  * y la cantidad en kilogramos del producto solicitado.
  * 
  * @author Alexandre Insua Moreira
@@ -66,6 +68,7 @@ public class Pedido
         this.cantidad = cantidad;
         this.logistica = logistica;
         creacion = LocalDate.now();
+        entrega = LocalDate.now().plusDays(10);
         estado = PedidoEstado.PENDIENTE; 
         coste = 0;
         costeLogistica = 0;
@@ -73,8 +76,6 @@ public class Pedido
         iva = 0;
         total = 0;
         priceFormatter = new DecimalFormat("#.##");
-
-        entrega = LocalDate.now().plusDays(10);
     }
 
     /**
@@ -162,6 +163,11 @@ public class Pedido
         return cantidad;
     }
 
+    /**
+     * Obtiene la logística asignada al pedido.
+     * 
+     * @return la logística asignada al pedido.
+     */
     public Logistica getLogistica(){
         return logistica;
     }
@@ -305,6 +311,7 @@ public class Pedido
 
     /**
      * Obtiene el coste total del pedido en €.
+     * 
      * @return el coste total del pedido en €.
      */
     public float getTotal(){
@@ -313,6 +320,7 @@ public class Pedido
 
     /**
      * Obtiene una representación en forma de cadena de caracteres del coste total del pedido en €.
+     * 
      * @return el coste total del pedido en €.
      */
     public String getTotalString(){
@@ -331,6 +339,13 @@ public class Pedido
         return Period.between(creacion, entrega).getDays() > DIAS_REVISION_PRECIOS;
     }
 
+    /**
+     * Actualiza los costes del pedido según el precio de referencia del producto,
+     * la oferta de la logística y el tipo de cliente. Los costes calculados son
+     * el coste bruto de la mercancía, que recibe el productor, el beneficio de 
+     * la cooperativa, el coste de la logística, el IVA si es aplicable y el total
+     * de los costes.
+     */
     public void actualizarCostesPedido(){
         setCoste(cantidad * producto.getPrecio());
         setBeneficio(coste * getConstanteMargenBeneficios());
@@ -339,6 +354,12 @@ public class Pedido
         setTotal(coste + beneficio + costeLogistica + iva);
     }
 
+    /**
+     * Actualiza la cantidad disponible de un producto. De cada productor que
+     * tiene producción, se descuenta una cantidad proporcional, se actualiza 
+     * la cantidad disponible en el producto asignado al productor y en el total
+     * del producto.
+     */
     public void actualizarCantidadesDisponibles(){
         ArrayList<NoFederado> nf = producto.getProdutores();
         nf.forEach(productor -> {
@@ -351,6 +372,11 @@ public class Pedido
         producto.setDisponible(producto.getDisponible() - cantidad);
     }
 
+    /**
+     * Para cada productor que participa en la provisión del pedido,
+     * se calcula la partida proporcional correspondiente y se crea 
+     * un objeto de tipo venta y se le asigna
+     */
     public void asignarVentas(){
         ArrayList<NoFederado> nf = producto.getProdutores();
         nf.forEach(productor -> {
@@ -363,6 +389,7 @@ public class Pedido
 
     /**
      *  Devuelve una representación en forma de cadena de caracteres del objeto Pedido.
+     *  
      *  @return la representación en forma de cadena de caracteres del objeto Pedido.
      */
     public String toString(){
@@ -372,7 +399,6 @@ public class Pedido
         +"\n\tBruto: "+ getCosteString() +"€ Logística: "+ getCosteLogisticaString() + "€ Beneficio: "+ getBeneficioString() + getIvaString() + "€ Total: "+ getTotalString() + "€";
     }
 
-    // obtiene la constante para calcular el margen de beneficio   
     private float getConstanteMargenBeneficios(){
         if (cliente instanceof Distribuidor){
             return MARGEN_DISTRIBUIDOR;
@@ -380,7 +406,6 @@ public class Pedido
         return MARGEN_MINORISTA;
     }
 
-    // obtiene la constante para calcular la cantidad de iva
     private float getConstanteIVA(){
         if (cliente instanceof Minorista){
             return IVA;

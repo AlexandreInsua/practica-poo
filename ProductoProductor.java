@@ -1,6 +1,7 @@
 /**
- * Clase ProductoProductor. Esta clase permite gestionar la información relacionada con un producto, su
- * extensión de cultivo asignada a un productor específico y su cantidad disponible.
+ * La clase ProductoProductor representa la relación entre un producto y un productor,
+ * incluyendo la extensión de cultivo asignada, la producción anual y la cantidad disponible para la venta.
+ * También permite controlar si el producto está federado.
  * 
  * Autor: Alexandre Insua Moreira
  * Versión: 1.0

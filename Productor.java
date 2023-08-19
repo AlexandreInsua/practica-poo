@@ -1,22 +1,33 @@
-import java.util.List;
-
 /**
- * Clase abstracta Productor - Representa un Productor genérico no instanciable.
- * Implementa un identificador único para cada producto, el nombre y los productos
- * que proporciona a la cooperativa.
+ * Clase abstracta Productor. Representa un Productor genérico no instanciable.
+ * Implementa el nombre del productor que proporciona a la cooperativa.
  * 
- * @author: Alexandre Insua Moreira.
- * @version: 
+ * Esta clase abstracta sirve como base para representar a los productores que suministran
+ * productos a una cooperativa. Cada productor tiene un nombre asociado.
+ *  
+ * @author Alexandre Insua Moreira.
+ * @version 1.0
  */
 public abstract class Productor
 {
-    private long id;
+    // Nombre del productor
     private String nombre;
 
+    
+    /**
+     * Constructor de la clase Productor.
+     * 
+     * @param nombre El nombre del productor.
+     */
     Productor(String nombre){
         this.nombre = nombre;
     }
 
+    /**
+     * Obtiene el nombre del productor.
+     * 
+     * @return El nombre del productor.
+     */
     public String getNombre(){
         return nombre;
     }

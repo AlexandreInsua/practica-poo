@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Clase GranProductor que representa un gran productor. Esta clase extiende la clase Productor
- * y permite gestionar la información relacionada
- * con un gran productor, incluyendo los productos que cultiva y asigna.
+ * Clase GranProductor que representa un gran productor. Esta clase extiende 
+ * la clase NoFederado y permite gestionar la información relacionada
+ * con un gran productor, incluyendo los productos que cultiva.
  * 
  * Autor: Alexandre Insua Moreira
  * Versión: 1.0
@@ -30,20 +30,20 @@ public class GranProductor extends NoFederado {
      * @return Una representación en forma de cadena de caracteres del objeto GranProductor.
      */
     public String toString() {
-        return getNombre() + " Gran productor" + listProducts();
+        return getNombre() + " Gran productor" + listarProductos();
     }
 
     /**
      * Asigna un producto al gran productor.
      * 
-     * @param p El producto a asignar.
+     * @param producto El producto a asignar.
      * @return true si el producto se asigna correctamente, false de lo contrario.
      */
     public boolean asignarProducto(ProductoProductor producto) {
         boolean result = false;
 
         try {
-            checkIsProduct(producto);
+            esProducto(producto);
             productos.add(producto);
             result = true;
         } catch (Exception e) {
@@ -69,35 +69,31 @@ public class GranProductor extends NoFederado {
 
     /**
      * Devuelve la lista de productos asignados al productor.
-     * @return Una lista de objetos ProductoProductor que representa los productos asignados
-     *         al productor.
+     * 
+     * @return Una lista de objetos ProductoProductor que representa 
+     * los productos asignados al productor.
      */
     public List<ProductoProductor> getProductos(){
         return productos;
     }
 
-    /**
-     * Verifica si un producto ya ha sido asignado al gran productor.
-     * 
-     * @param p El producto a verificar.
-     * @throws Exception si el producto ya ha sido asignado previamente.
-     */
-    private void checkIsProduct(ProductoProductor p) throws Exception {
+    private boolean esProducto(ProductoProductor p) throws IllegalArgumentException {
         for (ProductoProductor producto : productos) {
             if (producto != null && (producto == p || producto.getProducto().getNombre().equals(p.getProducto().getNombre()))) {
-                throw new Exception("No se puede agregar el mismo producto por segunda vez");
+                throw new IllegalArgumentException("No se puede agregar el mismo producto por segunda vez");
             }
         }
+        return true;
     }
 
-    private String listProducts(){
-        String productList = ""; 
+    private String listarProductos(){
+        String listaProductos = ""; 
 
-        for(ProductoProductor p: productos){
-            if (p != null && p.getFedederado() != true) {
-                productList += "\n\t" + p.toString();
+        for(ProductoProductor producto: productos){
+            if (producto != null && producto.getFedederado() != true) {
+                listaProductos += "\n\t" + producto.toString();
             }
         }
-        return productList; 
+        return listaProductos; 
     }
 }

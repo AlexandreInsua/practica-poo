@@ -1,10 +1,10 @@
 #BlueJ class context
 comment0.target=Minorista
-comment0.text=\r\n\ Esta\ clase\ representa\ un\ minorista,\ que\ es\ un\ tipo\ de\ cliente\ de\ una\ cooperativa.\r\n\ Hereda\ de\ la\ clase\ Cliente\ y\ proporciona\ una\ implementaci\u00F3n\ concreta\ de\ sus\ m\u00E9todos.\r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\ \r\n
+comment0.text=\r\n\ Esta\ clase\ representa\ un\ minorista,\ que\ es\ un\ tipo\ de\ cliente\ de\ una\ cooperativa.\r\n\ Hereda\ de\ la\ clase\ Cliente\ y\ proporciona\ una\ implementaci\u00F3n\ concreta\ de\ sus\ m\u00E9todos.\r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\ 1.0\r\n
 comment1.params=nombre\ distancia
 comment1.target=Minorista(java.lang.String,\ int)
 comment1.text=\r\n\ Constructor\ de\ la\ clase\ Minorista.\r\n\ \r\n\ @param\ nombre\ El\ nombre\ del\ minorista.\r\n\ @param\ distancia\ La\ distancia\ del\ minorista\ hasta\ la\ cooperativa.\r\n
 comment2.params=
 comment2.target=java.lang.String\ toString()
-comment2.text=\r\n\ Devuelve\ una\ representaci\u00F3n\ en\ forma\ de\ cadena\ de\ caracteres\ del\ objeto\ Minorista.\r\n\ @return\ representaci\u00F3n\ en\ forma\ de\ cadena\ de\ caracteres\ del\ objeto\ Minorista.\r\n
+comment2.text=\r\n\ Devuelve\ una\ representaci\u00F3n\ en\ forma\ de\ cadena\ de\ caracteres\ del\ objeto\ Minorista.\r\n\ \r\n\ @return\ representaci\u00F3n\ en\ forma\ de\ cadena\ de\ caracteres\ del\ objeto\ Minorista.\r\n
 numComments=3

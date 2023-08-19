@@ -1,11 +1,12 @@
 #BlueJ class context
 comment0.target=NoFederado
-comment0.text=\r\n\ Clase\ abstracta\ NoFederado\ representa\ una\ abstracci\u00F3n\ que\ modela\ \r\n\ el\ comportamiento\ com\u00FAn\ a\ las\ clases\ GranProductor\ y\ PeqProductor.\r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\ \r\n
+comment0.text=\r\n\ Clase\ abstracta\ NoFederado\ representa\ una\ abstracci\u00F3n\ que\ modela\ \r\n\ el\ comportamiento\ com\u00FAn\ a\ las\ clases\ GranProductor\ y\ PeqProductor.\r\n\ \r\n\ Esta\ clase\ proporciona\ m\u00E9todos\ para\ gestionar\ ventas\ y\ productos\ de\ un\ productor\ no\ federado.\r\n\ \r\n\ @author\ Alexandre\ Insua\ Moreira\r\n\ @version\ 1.0\r\n
 comment1.params=nombre
 comment1.target=NoFederado(java.lang.String)
 comment1.text=\r\n\ Constructor\ de\ la\ clase\ NoFederado.\r\n\ \r\n\ @param\ nombre\ El\ nombre\ del\ productor\ no\ federado.\r\n
 comment2.params=
 comment2.target=java.util.ArrayList\ getVentas()
+comment2.text=\r\n\ Obtiene\ la\ lista\ de\ ventas\ realizadas\ por\ el\ productor\ no\ federado.\r\n\r\n\ @return\ Una\ lista\ de\ objetos\ Venta\ que\ representa\ las\ ventas\ realizadas.\r\n
 comment3.params=venta
 comment3.target=void\ agregarVenta(Venta)
 comment3.text=\r\n\ Agrega\ una\ venta\ a\ la\ lista\ de\ ventas.\r\n\ \r\n\ @param\ venta\ La\ instancia\ de\ la\ clase\ Venta\ que\ se\ va\ a\ agregar\ a\ la\ lista.\r\n

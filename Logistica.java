@@ -1,9 +1,16 @@
-
+import java.text.DecimalFormat;
 /**
- * 
+ * Clase que representa una empresa de logística.
+ * Esta clase maneja los precios y cálculos relacionados con la logística de los pedidos.
+ * Los precios se estructuran en función del tipo de producto (perecedero y no perecedero)
+ * y del tipo de logística dependiendo de la distancia que se debe recorrer
+ * (pequeña logística y gran logística.
+ * El cálculo de los costes de cada pedido se basa en la suma de los costes de la gran logística
+ * y la pequeña logística, pero la forma en que se calculan estos parciales varían según
+ * el tipo de producto del pedido.
  * 
  * @author Alexandre Insua Moreira
- * @version 
+ * @version 1.0
  */
 public class Logistica
 {
@@ -24,7 +31,9 @@ public class Logistica
     // modificador del coste los tramos de la gran logística de los productos perecederos
     private final float MODIFICADOR = 0.5f;
     // constante que representa el valor en kilogramos de una tonelada métrica
-    private final float TM = 1000;
+    private final int TM = 1000;
+    // variable auxiliar para formatear datos
+    DecimalFormat priceFormatter;
 
     /**
      * Constructor de la clase Logistica.
@@ -32,7 +41,7 @@ public class Logistica
      * Este constructor crea una instancia de Logistica con los parámetros proporcionados,
      * asignando los valores de nombre y precios correspondientes después de validar los precios.
      *
-     * @param n Nombre de la logística.
+     * @param nombre Nombre de la logística.
      * @param pglp precio de gran logística de los produtos perecederos (GLP).
      * @param pplp precio de la pequeña logística de los produtos perecederos (PLP).
      * @param pglnp Precio de Producto Perecedero (GLNP).
@@ -41,19 +50,18 @@ public class Logistica
      * @throws IllegalArgumentException Si la condición de validación no se cumple y los precios no satisfacen
      *                                  las relaciones requeridas.
      */
-
-    public Logistica(String n, float pglp, float pplp, float pglnp,float pplnp)
+    public Logistica(String nombre, float pglp, float pplp, float pglnp,float pplnp)
     {
 
-        if (!validatePrices(pglp, pplp, pglnp, pplnp)){
+        if (!validarPrecios(pglp, pplp, pglnp, pplnp)){
             throw new IllegalArgumentException("No se puede crear la logística porque los precios son incorrectos.");
         } 
-        nombre = n;
+        this.nombre = nombre;
         precioGLP = pglp;
         precioPLP = pplp;
         precioGLNP = pglnp;                ;
-        precioPLNP = pplnp;
-
+        precioPLNP = pplnp;  
+        priceFormatter = new DecimalFormat("#.##");
     }
 
     /**
@@ -65,29 +73,40 @@ public class Logistica
         return nombre;
     }
 
+    /**
+     * Calcula el precio total de la logística para un pedido dado.
+     * 
+     * @param pedido El pedido para el cual se calculará el precio de la logística.
+     * @return El costo total de la logística para el pedido.
+     */
     public float calcularPrecioLogisticaPedido(Pedido pedido){
         float sumaCostesTonelada = 0;
 
         if (pedido.getProducto() instanceof Perecedero){
-            sumaCostesTonelada = calculateBigLogisticsCost(
-                calculateBigLogisticsDistance(pedido.getCliente().getDistancia(),TRAMO_PERECEDERO ),
+            sumaCostesTonelada = calcularCosteGranLogistica(
+                calculaDistanciaGranLogistica(pedido.getCliente().getDistancia(),TRAMO_PERECEDERO ),
                 precioGLP)
-            + calculateSmallLogisticsCost(
-                calculateSmallLogisticsDistance(pedido.getCliente().getDistancia(),TRAMO_PERECEDERO),
+            + calcularCostePequenaLogistica(
+                calcularDistanciaPequenaLogistica(pedido.getCliente().getDistancia(),TRAMO_PERECEDERO),
                 precioPLP, pedido.getCantidad());
         } else if (pedido.getProducto() instanceof NoPerecedero){
-            sumaCostesTonelada = calculateSections(pedido.getCliente().getDistancia()) * calculateSectionCost(pedido.getProducto().getPrecio(), pedido.getCantidad())
-            + calculateBigLogisticsCost(calculateBigLogisticsDistance(pedido.getCliente().getDistancia(),TRAMO_NO_PERECEDERO ),precioGLNP) * calculateTons(pedido.getCantidad())
-            + calculateSmallLogisticsCost(calculateSmallLogisticsDistance(pedido.getCliente().getDistancia(),TRAMO_NO_PERECEDERO),precioPLNP, pedido.getCantidad());
+            sumaCostesTonelada = calcularNumeroTramos(pedido.getCliente().getDistancia()) * calcularCosteTramo(pedido.getProducto().getPrecio(), pedido.getCantidad())
+            + calcularCosteGranLogistica(calculaDistanciaGranLogistica(pedido.getCliente().getDistancia(),TRAMO_NO_PERECEDERO ),precioGLNP) * calcularToneladas(pedido.getCantidad())
+            + calcularCostePequenaLogistica(calcularDistanciaPequenaLogistica(pedido.getCliente().getDistancia(),TRAMO_NO_PERECEDERO),precioPLNP, pedido.getCantidad());
         }
         return sumaCostesTonelada;
     }
 
+    /**
+     * Devuelve una representación en cadena de la instancia de Logistica.
+     * 
+     * @return Una cadena que contiene el nombre de la logística y sus precios asociados.
+     */
     public String toString(){
         return getNombre() 
-        + "\n\t  Oferta de precios para grandes y pequeños trayectos."
-        + "\n\t  Productos perecederos:  " + precioGLP + " €/km y " + precioPLP + " €/km"
-        + "\n\t  Productos no perecederos:  " + precioGLNP + " €/km y " + precioPLNP + " €/km"
+        + "\n\tOferta de precios para grandes y pequeños trayectos."
+        + "\n\t Productos perecederos:  " + priceFormatter.format(precioGLP) + " €/km y " + priceFormatter.format(precioPLP) + " €/km"
+        + "\n\t Productos no perecederos:  " + priceFormatter.format(precioGLNP) + " €/km y " + priceFormatter.format(precioPLNP) + " €/km"
         ; 
     }
 
@@ -106,42 +125,38 @@ public class Logistica
      * @return true si el precio GLP es mayor que los precios PLP y GLNP es mayor que PLNP 
      *         y GLP es mayor que GLNP, false en caso contrario.
      */
-    private boolean validatePrices(float pglp, float pplp, float pglnp,float pplnp){
+    private boolean validarPrecios(float pglp, float pplp, float pglnp,float pplnp){
         if(pglp > pplp && pglp > pglnp && pglnp > pplnp){
             return true;
         }
         return false;
     }
-    // Calcula la distancia de pequeña logística
-    private int calculateSmallLogisticsDistance(int distancia, int tramo){
+
+    private int calcularDistanciaPequenaLogistica(int distancia, int tramo){
         return distancia % tramo; 
     }
-    // Calcula la distancia de la gran logística
-    private int calculateBigLogisticsDistance(int distancia, int tramo) {
-        return distancia -= calculateSmallLogisticsDistance(distancia, tramo);
+
+    private int calculaDistanciaGranLogistica(int distancia, int tramo) {
+        return distancia -= calcularDistanciaPequenaLogistica(distancia, tramo);
     }
 
-    // Calcula en número de toneladas métricas
-    private int calculateTons(int cantidad) {
+    private int calcularToneladas(int cantidad) {
         return cantidad % TM == 0 ? (int) (cantidad / TM ): (int) ( cantidad / TM + 1);    
     }
 
-    // Calcula el número de tramos para la gran logística de los productos no perecederos
-    private int calculateSections(int distancia){
+    private int calcularNumeroTramos(int distancia){
         return distancia / TRAMO_NO_PERECEDERO;
     }
-    // Calcula el coste de cada tramo de la gran logística de los productos no perecederos
-    private float calculateSectionCost(float precio, int cantidad){
+
+    private float calcularCosteTramo(float precio, int cantidad){
         return MODIFICADOR * precio * cantidad;
     }
 
-    // Calcula el coste de la gran logística
-    private float calculateBigLogisticsCost(int distancia, float precio){
+    private float calcularCosteGranLogistica(int distancia, float precio){
         return distancia * precio;
     }
 
-    // Calcula el coste de la pequeña logística
-    private float calculateSmallLogisticsCost(int distancia, float precio, int cantidad){
+    private float calcularCostePequenaLogistica(int distancia, float precio, int cantidad){
         return distancia * precio * cantidad;
     }
 }

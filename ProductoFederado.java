@@ -1,5 +1,6 @@
 /**
- * La clase ProductoFederado representa un producto federado, que es producido por un pequeño productor y es usado por un Productor Federado.
+ * La clase ProductoFederado representa un producto federado, 
+ * que es producido por un pequeño productor y es usado por un Productor Federado.
  * Esta clase permite acceder a la información del productor y del producto asociado.
  * 
  * @author Alexandre Insua Moreira.

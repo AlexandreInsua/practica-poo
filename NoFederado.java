@@ -6,8 +6,10 @@ import java.util.List;
  * Clase abstracta NoFederado representa una abstracción que modela 
  * el comportamiento común a las clases GranProductor y PeqProductor.
  * 
+ * Esta clase proporciona métodos para gestionar ventas y productos de un productor no federado.
+ * 
  * @author Alexandre Insua Moreira
- * @version 
+ * @version 1.0
  */
 public abstract class NoFederado extends Productor
 {
@@ -28,6 +30,11 @@ public abstract class NoFederado extends Productor
         priceFormatter = new DecimalFormat("#.##");        
     }
 
+     /**
+     * Obtiene la lista de ventas realizadas por el productor no federado.
+     *
+     * @return Una lista de objetos Venta que representa las ventas realizadas.
+     */
     public ArrayList<Venta> getVentas(){
         return ventas;
     }

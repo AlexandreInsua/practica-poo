@@ -3,7 +3,7 @@
  * Hereda de la clase Cliente y proporciona una implementación concreta de sus métodos.
  * 
  * @author Alexandre Insua Moreira
- * @version 
+ * @version 1.0
  */
 public class Minorista extends Cliente {
 
@@ -16,12 +16,13 @@ public class Minorista extends Cliente {
     public Minorista(String nombre, int distancia) {
         super(nombre, distancia);
     }   
-    
+
     /**
      * Devuelve una representación en forma de cadena de caracteres del objeto Minorista.
+     * 
      * @return representación en forma de cadena de caracteres del objeto Minorista.
      */
     public String toString(){
-        return getNombre() + " MINORISTA. Distancia " + getDistancia()+" km.";
+        return getNombre() + " CLIENTE FINAL. Distancia " + getDistancia()+" km.";
     }
 }

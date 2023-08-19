@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=ProductoProductor
-comment0.text=\r\n\ Clase\ ProductoProductor.\ Esta\ clase\ permite\ gestionar\ la\ informaci\u00F3n\ relacionada\ con\ un\ producto,\ su\r\n\ extensi\u00F3n\ de\ cultivo\ asignada\ a\ un\ productor\ espec\u00EDfico\ y\ su\ cantidad\ disponible.\r\n\ \r\n\ Autor\:\ Alexandre\ Insua\ Moreira\r\n\ Versi\u00F3n\:\ 1.0\r\n
+comment0.text=\r\n\ La\ clase\ ProductoProductor\ representa\ la\ relaci\u00F3n\ entre\ un\ producto\ y\ un\ productor,\r\n\ incluyendo\ la\ extensi\u00F3n\ de\ cultivo\ asignada,\ la\ producci\u00F3n\ anual\ y\ la\ cantidad\ disponible\ para\ la\ venta.\r\n\ Tambi\u00E9n\ permite\ controlar\ si\ el\ producto\ est\u00E1\ federado.\r\n\ \r\n\ Autor\:\ Alexandre\ Insua\ Moreira\r\n\ Versi\u00F3n\:\ 1.0\r\n
 comment1.params=producto\ extension
 comment1.target=ProductoProductor(Producto,\ float)
 comment1.text=\r\n\ Constructor\ para\ objetos\ de\ la\ clase\ ProductoProductor.\r\n\ \r\n\ @param\ produto\ El\ producto\ a\ asignar\ al\ productor.\r\n\ @param\ extension\ La\ extensi\u00F3n\ del\ cultivo\ en\ ha\ que\ se\ va\ a\ asignar\ al\ productor.\r\n

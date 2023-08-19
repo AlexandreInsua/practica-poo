@@ -1,4 +1,4 @@
 #BlueJ class context
 comment0.target=PedidoEstado
-comment0.text=\r\n\ Enumeration\ class\ PedidoEstado\ -\ write\ a\ description\ of\ the\ enum\ class\ here\r\n\ \r\n\ @author\ (your\ name\ here)\r\n\ @version\ (version\ number\ or\ date\ here)\r\n
+comment0.text=\r\n\ El\ enumerado\ PedidoEstado\ representa\ los\ posibles\ estados\ de\ un\ pedido.\r\n\ \r\n\ Esta\ enumeraci\u00F3n\ define\ dos\ valores\ constantes\:\ PENDIENTE\ y\ ENTREGADO,\ \r\n\ que\ indican\ los\ estados\ en\ los\ que\ puede\ encontrarse\ un\ pedido.\r\n\ \r\n\ PENDIENTE\:\ Indica\ que\ el\ pedido\ est\u00E1\ pendiente\ de\ ser\ entregado.\r\n\ ENTREGADO\:\ Indica\ que\ el\ pedido\ ha\ sido\ entregado\ satisfactoriamente.\r\n\ \r\n\ Esta\ enumeraci\u00F3n\ se\ utiliza\ para\ gestionar\ y\ seguir\ el\ estado\ de\ los\ pedidos.\r\n\ \r\n\ Autor\:\ Alexandre\ Insua\ Moreira\r\n\ Versi\u00F3n\:\ 1.0.\r\n
 numComments=1
