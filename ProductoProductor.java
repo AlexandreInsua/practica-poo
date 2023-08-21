@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 /**
  * La clase ProductoProductor representa la relación entre un producto y un productor,
  * incluyendo la extensión de cultivo asignada, la producción anual y la cantidad disponible para la venta.
@@ -20,6 +21,8 @@ public class ProductoProductor {
     private boolean federado;
     // Tonelada métrica en kg
     private final int TM = 1000;
+    // variable auxiliar para formatear cantidades
+    private DecimalFormat numberFormatter;
 
     /**
      * Constructor para objetos de la clase ProductoProductor.
@@ -33,6 +36,7 @@ public class ProductoProductor {
         produccion = producto.getRendimiento() * TM * extension;
         disponible = producto.getRendimiento() * TM * extension ;
         federado = false;
+        numberFormatter = new DecimalFormat("#.##");        
     }
 
     /**
@@ -104,6 +108,6 @@ public class ProductoProductor {
      * @return Una representación en forma de cadena de caracteres del objeto ProductoProductor.
      */
     public String toString() {
-        return producto.getNombre() + ": " + extension + " Ha. Disponible: " + disponible + "kg";
+        return producto.getNombre() + ": " + numberFormatter.format(extension) + " Ha. Disponible: " + numberFormatter.format(disponible) + "kg";
     }
 }

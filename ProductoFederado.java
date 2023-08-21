@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 /**
  * La clase ProductoFederado representa un producto federado, 
  * que es producido por un pequeño productor y es usado por un Productor Federado.
@@ -12,6 +13,8 @@ public class ProductoFederado
     private Productor productor;
     // Producto federado.
     private ProductoProductor producto;
+    // variable auxiliar para formatear cantidades
+    private DecimalFormat numberFormatter;
 
     /**
      * Constructor para objetos de la clase ProductoFederado.
@@ -23,6 +26,7 @@ public class ProductoFederado
     {
         this.productor = productor;
         this.producto = producto;
+        numberFormatter = new DecimalFormat("#.##");  
     }
 
     /**
@@ -49,6 +53,6 @@ public class ProductoFederado
      * @return Una cadena que contiene información sobre el productor, la extensión y la disponibilidad del producto.
      */
     public String toString(){
-        return "Productor: " + productor.getNombre() + " " +   producto.getExtension() +  " Ha. Disponible: " + producto.getDisponible() + "kg"; 
+        return "Productor: " + productor.getNombre() + " " +  numberFormatter.format(producto.getExtension()) +  " Ha. Disponible: " + numberFormatter.format(producto.getDisponible()) + "kg"; 
     }
 }

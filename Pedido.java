@@ -32,6 +32,8 @@ public class Pedido
     private Logistica logistica;
     // Estado del pedido
     private PedidoEstado estado; 
+    // private precio de referencia del producto en €
+    private float precio;
     // coste del producto en €
     private float coste;
     // Coste de la logistica en €
@@ -67,6 +69,7 @@ public class Pedido
         this.producto = producto;
         this.cantidad = cantidad;
         this.logistica = logistica;
+        precio = producto.getPrecio();
         creacion = LocalDate.now();
         entrega = LocalDate.now().plusDays(10);
         estado = PedidoEstado.PENDIENTE; 
@@ -182,12 +185,39 @@ public class Pedido
     }
 
     /**
-     * Establece el estado del pedido.
+     * Obtiene el estado del pedido.
+     * 
+     * @return El estado del producto
+     */
+    public String getEstadoString(){
+        return estado == PedidoEstado.PENDIENTE ? "Pendiente" : "Entregado";
+    }
+
+    /**
+     * Establece una representación en forma de cadena de caracteres del estado del pedido.
      */
     public void setEstadoEntregado(){
         estado =  PedidoEstado.ENTREGADO;
     }
 
+     /**
+     * Establece el precio de referencia del producto en €.
+     * 
+     * @param El precio de referencia del producto  en €.
+     */
+    public void setPrecio(float precio){
+        this.precio = precio;
+    }
+    
+    /**
+     * Obtiene una representación en forma de cadena de caracteres del precio de referencia del producto en €.
+     * 
+     * @return El precio de referencia del producto en €.
+     */
+    public String getPrecioString(){
+        return priceFormatter.format(precio);
+    }
+    
     /**
      * Establece el coste de la mercancía del pedido en €.
      * 
@@ -336,7 +366,7 @@ public class Pedido
      *         <code>false</code> en caso contrario.
      */
     public boolean esPospuesto(LocalDate creacion, LocalDate entrega){
-        return Period.between(creacion, entrega).getDays() > DIAS_REVISION_PRECIOS;
+        return Period.between(creacion, entrega).getYears() > 0 || Period.between(creacion, entrega).getMonths() > 0 || Period.between(creacion, entrega).getDays() > DIAS_REVISION_PRECIOS;
     }
 
     /**
@@ -347,6 +377,7 @@ public class Pedido
      * de los costes.
      */
     public void actualizarCostesPedido(){
+        setPrecio(producto.getPrecio());
         setCoste(cantidad * producto.getPrecio());
         setBeneficio(coste * getConstanteMargenBeneficios());
         setCosteLogistica(logistica.calcularPrecioLogisticaPedido(this));
@@ -393,10 +424,11 @@ public class Pedido
      *  @return la representación en forma de cadena de caracteres del objeto Pedido.
      */
     public String toString(){
-        return "Nº: "+ getId() +" Fecha: "+getCreacionString() +" Entrega: "+ getEntregaString() + " Estado: " + getEstado() 
-        +"\n\tCliente: "+ getCliente().getNombre() +"(" + getCliente().getClass().getName() + ") Producto: "+ getProducto().getNombre() 
-        +"("+ getProducto().getPrecio() + " €/kg)  Cantidad: "+ getCantidad()+" kg" 
-        +"\n\tBruto: "+ getCosteString() +"€ Logística: "+ getCosteLogisticaString() + "€ Beneficio: "+ getBeneficioString() + getIvaString() + "€ Total: "+ getTotalString() + "€";
+        return "Nº: "+ getId() +" Fecha: "+getCreacionString() +" Entrega: "+ getEntregaString() + " " + getEstadoString() 
+        +"\n\tCliente: "+ getCliente().getNombre() +"(" + getCliente().getClass().getName() + ") Producto: "+ getProducto().getNombre().toUpperCase() 
+        +" ("+ getPrecioString() + " €/kg)  Cantidad: "+ getCantidad()+" kg" 
+        +"\n\tBruto: "+ getCosteString() +"€ Logística: "+ getCosteLogisticaString() + "€ Beneficio: "+ getBeneficioString() + getIvaString() + "€ Total: "+ getTotalString() + "€"
+        +"\n";
     }
 
     private float getConstanteMargenBeneficios(){
