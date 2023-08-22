@@ -190,7 +190,7 @@ public class Cooperativa
         listarImportesProductores();
         listarImportesLogisticas();
         listarBeneficiosCooperativa();
-        listarEvolucionPreciosReferencia();
+        listarCotizaciones();
     }
 
     // PRODUCTOS
@@ -470,19 +470,17 @@ public class Cooperativa
      * @param logistica La empresa de logística encargada de la entrega.
      * @return `true` si el pedido se crea y agrega correctamente, `false` en caso contrario.
      */
-    public boolean crearPedido(long id, Cliente cliente, Producto producto, int cantidad, Logistica logistica){
+    public void crearPedido(long id, Cliente cliente, Producto producto, int cantidad, Logistica logistica){
         try {
             if(validarPedido(cliente, producto, cantidad)){
                 Pedido pedido = new Pedido(id, cliente, producto, cantidad, logistica);
                 pedido.actualizarCostesPedido();
                 pedido.actualizarCantidadesDisponibles();
                 pedidos.add(pedido);
-                return true;
             }
         } catch (Exception e) {
             System.err.println(e);
         }
-        return false; 
     }
 
     /**
@@ -496,19 +494,17 @@ public class Cooperativa
      * @param logistica La empresa de logística encargada de la entrega.
      * @return `true` si el pedido se crea y agrega correctamente, `false` en caso contrario.
      */
-    public boolean crearPedido(long id, Cliente cliente, Producto producto, int cantidad, String fechaEntrega, Logistica logistica){
+    public void crearPedido(long id, Cliente cliente, Producto producto, int cantidad, String fechaEntrega, Logistica logistica){
         try {
             if (validarPedido(cliente, producto, cantidad) && validarFechaEntrega(fechaEntrega)){
                 Pedido pedido = new Pedido(id, cliente, producto, cantidad, logistica, fechaEntrega);
                 pedido.actualizarCostesPedido();
                 pedido.actualizarCantidadesDisponibles();
                 pedidos.add(pedido);
-                return true;
             }
         } catch (Exception e) {
             System.err.println(e);
         }
-        return false; 
     }
 
     /**
@@ -680,16 +676,6 @@ public class Cooperativa
             } 
         }
         System.out.println(" Total de beneficios: " + priceFormatter.format(totalBeneficios) + "€");
-    }
-
-    /**
-     *  Imprime la evolución de precios de referencia de cada producto.
-     */
-    public void listarEvolucionPreciosReferencia(){
-        System.out.println("\nEVOLUCIÓN DE PRECIOS");
-        for(Producto producto: productos){
-            producto.listarCotizaciones();
-        }
     }
 }
 
